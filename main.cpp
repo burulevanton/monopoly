@@ -2,6 +2,37 @@
 #include<cstdlib>
 #include<ctime>
 using namespace std;
+class player{
+	private :
+		int pos=0;
+		int money=0;
+		int numberOfFields=0;
+	public :
+		void setPos(int n)
+		{
+			pos = pos+n;
+		}
+		int getPos()
+		{
+			return pos;
+		}
+		void setMoney(int n)
+		{
+			money = money+n;
+		}
+		int getMoney()
+		{
+			return money;
+		}
+		void setNumberOfFields()
+		{
+			numberOfFields++;
+		}
+		int getNumberOfFields()
+		{
+			return NumberOfFields;
+		}
+};
 int dice(){
 	return  rand() % 6 + 1;
 }
