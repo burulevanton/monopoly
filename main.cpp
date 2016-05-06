@@ -15,8 +15,8 @@ class player{
 		string nameOfPlayer;
 	public :
 		void setPos(int n)
-		{   if(pos+n>=41){
-				pos=pos+n-41;
+		{   if(pos+n>=40){
+				pos=pos+n-40;
 			}
 			else 
 			pos = pos+n;
