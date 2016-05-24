@@ -3,14 +3,24 @@
 #include<iostream>
 #include<cstring>
 using namespace std;
+using namespace players;
 class field{ 
 private: 
 string nameOfOwner; 
 string name;
 int priceOfField; 
 int priceOfRent;
-int position;
 public:
+	field(string name, string nameOfOwner, int priceOfField, int priceOfRent){
+		setName(name);
+		setNameOfOwner(nameOfOwner);
+		setPriceOfField(priceOfField);
+		setPriceOfRent(priceOfRent);
+	}
+	field(string name, string nameOfOwner){
+		setName(name);
+		setNameOfOwner(nameOfOwner);
+	}
 	string getNameOfOwner()
 	{
 		return nameOfOwner;
