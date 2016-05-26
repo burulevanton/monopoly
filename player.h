@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-class MPlayer
+class Player
 {
 private:
 	string mNamePlayer;
@@ -12,7 +12,7 @@ private:
 	int mCurrentBalance;
 	int mLocation;
 public:
-	MPlayer(string name, int numPlayer);
+	Player(string name, int numPlayer);
 
 	string getName();
 	
@@ -27,7 +27,7 @@ public:
 
 	void RollDice();
 
-	~MPlayer();
+	~Player();
 };
 int Random();
 #endif
