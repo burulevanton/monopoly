@@ -5,7 +5,7 @@ Treasury::Treasury(string name) :Field(name) {
 }
 void Treasury::doTurn(Player* player[], int playerNum) {
 	int randomPenalty = 0;
-	cout << player[playerNum]->getName() << " popal na " << this->getName << endl;
+	cout << player[playerNum]->getName() << " popal na " << this->getName() << endl;
 	randomPenalty = Random();
 	switch (randomPenalty) {
 	case 1:

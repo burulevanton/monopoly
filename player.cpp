@@ -56,3 +56,6 @@ void Player::RollDice() {
 		counter++;
 	}
 }
+Player::~Player() {
+
+}

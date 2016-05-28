@@ -16,9 +16,9 @@ int Property::getRent() {
 	return mRent;
 }
 void Property::doTurn(Player* player[], int playerNum) {
-	cout << player[playerNum]->getName << "popal na" << this->getName() << endl;
+	cout << player[playerNum]->getName() << "popal na" << this->getName() << endl;
 	if (mOwner < 0) {
-		if (player[playerNum]->getBalance >= mCost) {
+		if (player[playerNum]->getBalance() >= mCost) {
 			player[playerNum]->decBalance(mCost);
 			cout << player[playerNum]->getName() << " kupil " << this->getName()<<" za "<<mCost << endl;
 			mOwner = playerNum;
