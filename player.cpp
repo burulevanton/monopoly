@@ -28,25 +28,64 @@ void Player::decBalance(int dec) {
 int Player::getBalance() {
 	return mCurrentBalance;
 }
+void Player::setOwned(string color) {
+	mColourGroupOwned.push_back(color);
+}
+bool Player::getOwned(string color) {
+	int searchSize = mColourGroupOwned.size();
+	int count = 0;
+	for (int i = 0; i < searchSize; i++) {
+		if (mColourGroupOwned[i] == color) {
+			count++;
+		}
+	}
+	if (color == "darkblue" || color == "brown") {
+		if (count == 2) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	else {
+		if (count == 3) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+}
+void Player::setOwnedRailway(string railway) {
+	mRailwayOwned.push_back(railway);
+}
+int Player::getOwnedRailway() {
+	return mRailwayOwned.size();
+}
+void Player::setOwnedUtility(string utility) {
+	mUtilityOwned.push_back(utility);
+}
+int Player::getOwnedUtility() {
+	return mUtilityOwned.size();
+}
 int Random() {
 	return  rand() % 6 + 1;
 }
 void Player::RollDice() {
-	int playerRoll1 = 0;
-	int playerRoll2 = 0;
 	int previousLoc = 0;
 	int counter = 0;
-
-	playerRoll1 = Random();
-	playerRoll2 = Random();
-	cout << mNamePlayer << " vibrasivaet " << playerRoll1 <<" i " <<playerRoll2<<endl;
+	mRoll1 = 0;
+	mRoll2 = 0;
+	mRoll1 = Random();
+	mRoll2 = Random();
+	cout << mNamePlayer << " vibrasivaet " << mRoll1 <<" i " <<mRoll2<<endl;
 	previousLoc = mLocation;
-	int playerRoll = playerRoll1 + playerRoll2;
+	int playerRoll = mRoll1 + mRoll2;
 	while (mLocation < previousLoc + playerRoll)
 	{
 		mLocation++;
 
-		if (mLocation == 26) {
+		if (mLocation == 40) {
 			playerRoll = playerRoll - counter;
 			mLocation = 0;
 			previousLoc = -1;
@@ -55,6 +94,9 @@ void Player::RollDice() {
 		}
 		counter++;
 	}
+}
+int Player::getRoll() {
+	return mRoll1 + mRoll2;
 }
 Player::~Player() {
 

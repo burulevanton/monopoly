@@ -1,10 +1,11 @@
 #include "field.h"
 #include "property.h"
 
-Property::Property(string name, int cost, int rent) :Field(name) {
+Property::Property(string name, int cost, int rent,string color) :Field(name) {
 	this->mCost = cost;
 	this->mRent = rent;
 	this->mOwner = -1;
+	this->mColourGroup = color;
 }
 int Property::getCost() {
 	return mCost;
@@ -15,7 +16,11 @@ int Property::getOwner() {
 int Property::getRent() {
 	return mRent;
 }
+string Property::getColourGroup() {
+	return mColourGroup;
+}
 void Property::doTurn(Player* player[], int playerNum) {
+	int toPay = 0;
 	cout << player[playerNum]->getName() << "popal na" << this->getName() << endl;
 	if (mOwner < 0) {
 		if (player[playerNum]->getBalance() >= mCost) {
@@ -29,8 +34,17 @@ void Property::doTurn(Player* player[], int playerNum) {
 		}
 	}
 	else if (mOwner != playerNum) {
-		player[playerNum]->decBalance(mRent);
-		player[mOwner]->addBalance(mRent);
+		if (player[mOwner]->getOwned(mColourGroup) == true) {
+			toPay = mRent + mRent;
+			player[playerNum]->decBalance(toPay);
+			player[mOwner]->addBalance(toPay);
+		}
+		else {
+			toPay = mRent;
+			player[playerNum]->decBalance(toPay);
+			player[mOwner]->addBalance(toPay);
+		}
+		cout << player[playerNum]->getName() << " zaplatil " << toPay << " za arendu" << endl;
 	}
 }
 Property::~Property() {

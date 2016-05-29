@@ -13,13 +13,15 @@ private:
 	int mCost;
 	int mRent;
 	int mOwner;
+	string mColourGroup;
 public:
-	Property(string name, int cost, int rent);
+	Property(string name, int cost, int rent,string color);
 	virtual void doTurn(Player* player[], int playerNum);
 
 	int getCost();
 	int getRent();
 	int getOwner();
+	string getColourGroup();
 
 	~Property();
 };

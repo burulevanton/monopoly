@@ -18,8 +18,10 @@ void Railway::doTurn(Player* player[], int playerNum) {
 		}
 	}
 	else if (mOwner != playerNum) {
-		player[playerNum]->decBalance(25);
-		player[mOwner]->addBalance(25);
+		int multiply = 0;
+		multiply = player[mOwner]->getOwnedRailway();
+		player[playerNum]->decBalance(25*multiply);
+		player[mOwner]->addBalance(25*multiply);
 	}
 }
 Railway::~Railway() {
