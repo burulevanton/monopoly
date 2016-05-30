@@ -11,6 +11,7 @@ private:
 	string mNamePlayer;
 	int mNumPlayer;
 	int mCurrentBalance;
+	bool changeLocation; //смена локации от поля Шанс
 	int mLocation;
 	int mRoll1;
 	int mRoll2;
@@ -42,6 +43,9 @@ public:
 
 	void RollDice();
 	int getRoll();
+
+	bool checkChanges();
+	void setChanges(bool change);
 
 	~Player();
 };

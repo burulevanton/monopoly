@@ -3,11 +3,12 @@
 #pragma once
 
 #include "field.h"
-
+#include <queue>
 class Treasury :public Field {
 public:
 	Treasury(string name);
-	virtual void doTurn(Player* player[], int playerNum);
+	void doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2);
+	int getTreasuryCard(std::queue<int> &q);
 
 	~Treasury();
 };

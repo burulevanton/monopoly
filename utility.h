@@ -8,7 +8,7 @@ private:
 public:
 	Utility(string name);
 
-	void doTurn(Player* player[], int playerNum);
+	void doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2);
 
 	~Utility();
 };

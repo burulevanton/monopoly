@@ -19,7 +19,7 @@ int Property::getRent() {
 string Property::getColourGroup() {
 	return mColourGroup;
 }
-void Property::doTurn(Player* player[], int playerNum) {
+void Property::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2) {
 	int toPay = 0;
 	cout << player[playerNum]->getName() << "popal na" << this->getName() << endl;
 	if (mOwner < 0) {

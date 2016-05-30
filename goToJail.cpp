@@ -2,7 +2,7 @@
 
 GoToJail::GoToJail(string name) :Field(name) {
 }
-void GoToJail::doTurn(Player*player[], int playerNum) {
+void GoToJail::doTurn(Player*player[], int playerNum, queue<int> &q1, queue<int> &q2){
 	cout << player[playerNum]->getName() << " popal na" << this->getName() << endl;
 	cout << player[playerNum]->getName() << " otpravlyaetsya v tur'mu" << endl;
 	cout << player[playerNum]->getName() << " platit 50" << endl;

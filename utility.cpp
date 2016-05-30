@@ -2,7 +2,7 @@
 Utility::Utility(string name) :Field(name) {
 	this->mOwner = -1;
 }
-void Utility::doTurn(Player *player[], int playerNum) {
+void Utility::doTurn(Player *player[], int playerNum, queue<int> &q1, queue<int> &q2) {
 	cout << player[playerNum]->getName() << "popal na" << this->getName() << endl;
 	if (mOwner < 0) {
 		if (player[playerNum]->getBalance() >= 150) {

@@ -1,6 +1,8 @@
 #include "game.h"
 
 Game::Game() {
+	fillQueue(cardChance);
+	fillQueue(cardTreasury);
 	player[0] = new Player("Bob", 1);
 	player[1] = new Player("Sam", 2);
 	Field *field[40];
@@ -95,12 +97,26 @@ void Game::playRound() {
 	for (int i = 0; i < 25; i++) {
 		for (int j = 0; j < 2; j++) {
 			player[j]->RollDice();
-			board[player[j]->getLocation()]->doTurn(player, j);
+			board[player[j]->getLocation()]->doTurn(player, j, cardChance, cardTreasury);
+			if (player[j]->checkChanges()) {
+				board[player[j]->getLocation()]->doTurn(player, j, cardChance, cardTreasury);
+				player[j]->setChanges(false);
+			}
 			cout << player[j]->getName() << " imeet " << player[j]->getBalance() << endl;
+			cout << "-----------------------------------------" << endl;
 		}
 	}
 }
-
+void Game::fillQueue(queue <int> &q) {
+	deque <int> dop;
+	for (int i = 0; i < 16; i++) {
+		dop.push_back(i);
+	}
+	random_shuffle(dop.begin(), dop.end());
+	for (int i = 0; i < 16; i++) {
+		q.push(dop[i]);
+	}
+}
 Game::~Game() {
 	for (int i = 0; i < 2; i++) 
 	{

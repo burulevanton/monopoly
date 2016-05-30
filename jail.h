@@ -6,7 +6,7 @@ class Jail :public Field {
 public:
 	Jail(string name);
 
-	void doTurn(Player* player[], int playerNum);
+	void doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2);
 
 	~Jail();
 };

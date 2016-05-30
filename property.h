@@ -16,7 +16,7 @@ private:
 	string mColourGroup;
 public:
 	Property(string name, int cost, int rent,string color);
-	virtual void doTurn(Player* player[], int playerNum);
+	void doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2);
 
 	int getCost();
 	int getRent();

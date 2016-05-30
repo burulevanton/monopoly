@@ -3,11 +3,12 @@
 #pragma once
 
 #include "field.h"
+#include <queue>
 class Chance : public Field {
 public:
 	Chance(string name);
-	virtual void doTurn(Player *player[], int playerNum);
-
+	void doTurn(Player *player[], int playerNum, std::queue<int> &q1,queue<int> &q2);
+	int getChanceCard(std::queue<int> &q);
 	~Chance();
 };
 #endif

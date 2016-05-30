@@ -5,6 +5,7 @@ Player::Player(string name, int num) {
 	this->mNumPlayer = num;
 	this->mCurrentBalance = 1500;
 	this->mLocation = 0;
+	this->changeLocation = false;
 }
 
 string Player::getName() {
@@ -97,6 +98,12 @@ void Player::RollDice() {
 }
 int Player::getRoll() {
 	return mRoll1 + mRoll2;
+}
+bool Player::checkChanges() {
+	return changeLocation;
+}
+void Player::setChanges(bool change) {
+	this->changeLocation = change;
 }
 Player::~Player() {
 

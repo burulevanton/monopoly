@@ -8,7 +8,7 @@ private:
 public:
 	Tax(string name,int cost);
 
-	void doTurn(Player* player[], int playerNum);
+	void doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2);
 
 	~Tax();
 };

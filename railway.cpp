@@ -4,7 +4,7 @@ Railway::Railway(string name) :Field(name) {
 int Railway::getOwner() {
 	return mOwner;
 }
-void Railway::doTurn(Player* player[], int playerNum) {
+void Railway::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2) {
 	cout << player[playerNum]->getName() << "popal na" << this->getName() << endl;
 	if (mOwner < 0) {
 		if (player[playerNum]->getBalance() >= 200) {
