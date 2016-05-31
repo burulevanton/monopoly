@@ -6,6 +6,8 @@ Player::Player(string name, int num) {
 	this->mCurrentBalance = 1500;
 	this->mLocation = 0;
 	this->changeLocation = false;
+	this->inGame = true;
+	this->spendMoney = false;
 }
 
 string Player::getName() {
@@ -29,10 +31,10 @@ void Player::decBalance(int dec) {
 int Player::getBalance() {
 	return mCurrentBalance;
 }
-void Player::setOwned(string color) {
+void Player::setOwnedColor(string color) {
 	mColourGroupOwned.push_back(color);
 }
-bool Player::getOwned(string color) {
+bool Player::getOwnedColor(string color) {
 	int searchSize = mColourGroupOwned.size();
 	int count = 0;
 	for (int i = 0; i < searchSize; i++) {
@@ -102,8 +104,42 @@ int Player::getRoll() {
 bool Player::checkChanges() {
 	return changeLocation;
 }
+void Player::setOwnedProperty(Field* property) {
+	mOwnedProperties.push_back(property);
+}
+void Player::setMortgage(Field* mortgage) {
+	mMortgageProperties.push_back(mortgage);
+}
+int Player::getPropertiesAmount() {
+	return mOwnedProperties.size();
+}
+int Player::getMortgageAmount(){
+	return mMortgageProperties.size();
+}
 void Player::setChanges(bool change) {
 	this->changeLocation = change;
+}
+Field* Player::getMortgages(int num) {
+	return mMortgageProperties[num];
+}
+Field* Player::getProperties(int num) {
+	return mOwnedProperties[num];
+}
+void Player::quitGame() {
+	inGame = false;
+}
+bool Player::checkQuit() {
+	if (inGame == true) {
+		return false;
+	}
+	else 
+		return true;
+}
+bool Player::getSpendMoney() {
+	return spendMoney;
+}
+void Player::setSpendMoney(bool money) {
+	spendMoney = money;
 }
 Player::~Player() {
 

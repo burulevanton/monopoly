@@ -3,8 +3,8 @@
 Game::Game() {
 	fillQueue(cardChance);
 	fillQueue(cardTreasury);
-	player[0] = new Player("Bob", 1);
-	player[1] = new Player("Sam", 2);
+	setNumOfPlayers();
+	setPlayers();
 	Field *field[40];
 	field[0] = new Forward("Vpered");
 	board.push_back(field[0]);
@@ -94,16 +94,28 @@ Game::Game() {
 	cout << "MONOPOLY" << endl;
 }
 void Game::playRound() {
-	for (int i = 0; i < 25; i++) {
-		for (int j = 0; j < 2; j++) {
-			player[j]->RollDice();
-			board[player[j]->getLocation()]->doTurn(player, j, cardChance, cardTreasury);
-			if (player[j]->checkChanges()) {
-				board[player[j]->getLocation()]->doTurn(player, j, cardChance, cardTreasury);
-				player[j]->setChanges(false);
+	int numOfActivePlayers = numOfPlayers;
+	while(numOfActivePlayers>1) {
+		numOfActivePlayers = 0;
+		for (int j = 0; j < numOfPlayers; j++) {
+			if (player[j]->checkQuit() == false) {
+				player[j]->RollDice();
+				board[player[j]->getLocation()]->doTurn(player, j, cardChance, cardTreasury,numOfPlayers);
+				if (player[j]->checkChanges()) {
+					board[player[j]->getLocation()]->doTurn(player, j, cardChance, cardTreasury,numOfPlayers);
+					player[j]->setChanges(false);
+				}
+				if (player[j]->getSpendMoney() == true) {
+					player[j]->setOwnedProperty(board[player[j]->getLocation()]);
+					player[j]->setSpendMoney(false);
+				}
+				//cout << player[j]->getName() << " imeet " << player[j]->getBalance() << endl;
+				checkPlayerBalance(player, j);
+				cout << "-----------------------------------------" << endl;
 			}
-			cout << player[j]->getName() << " imeet " << player[j]->getBalance() << endl;
-			cout << "-----------------------------------------" << endl;
+			if (player[j]->checkQuit() == false) {
+				numOfActivePlayers++;
+			}
 		}
 	}
 }
@@ -117,8 +129,66 @@ void Game::fillQueue(queue <int> &q) {
 		q.push(dop[i]);
 	}
 }
+void Game::checkPlayerBalance(Player *player[],int playerNum) {
+	if (player[playerNum]->getBalance() < 0) {
+		int count = 0;
+		while (player[playerNum]->getBalance() < 0) {
+			Property* pointer = dynamic_cast<Property*>(player[playerNum]->getProperties(count));
+			player[playerNum]->setMortgage(player[playerNum]->getProperties(count));
+			pointer->setMortgage();
+			player[playerNum]->addBalance((pointer->getCost()) / 2);
+			cout << player[playerNum]->getName() << "заложил" << pointer->getName() << endl;
+			delete(pointer);
+			count++;
+		}
+	}
+	else if (player[playerNum]->getBalance() > 0) {
+		while (player[playerNum]->getBalance() > 0 && player[playerNum]->getMortgageAmount() != 0) {
+			int count = 0;
+			Property* pointer = dynamic_cast<Property*>(player[playerNum]->getMortgages(count));
+			player[playerNum]->decBalance((pointer->getCost()) / 2);
+			cout << player[playerNum]->getName() << "выкупил"<<pointer->getName() << endl;
+			pointer->unsetMortgage();
+			delete(pointer);
+			count++;
+		}
+	}
+	if (player[playerNum]->getBalance() < 0 && player[playerNum]->getMortgageAmount() == 0) {
+		cout << player[playerNum]->getName() << "покидает игру" << endl;
+		player[playerNum]->quitGame();
+		int searchSize = player[playerNum]->getPropertiesAmount();
+		for (int i = 0; i < searchSize; i++) {
+			Property* pointer = dynamic_cast<Property*>(player[playerNum]->getProperties(i));
+			pointer->unsetMortgage();
+			pointer->unsetOwner();
+		}
+	}
+	if (player[playerNum]->checkQuit()==false) {
+		cout << player[playerNum]->getName() << "имеет " << player[playerNum]->getBalance() << endl;
+	}
+}
+void Game::setNumOfPlayers() {
+	cout << "¬ведите количество игроков ";
+	int num;
+	cin >> num;
+	if (num > 1 && num <= 8)
+		numOfPlayers = num;
+	else {
+		while (num <= 1 && num > 8)
+			cin >> num;
+		numOfPlayers = num;
+	}
+}
+void Game::setPlayers() {
+	for (int i = 0; i < numOfPlayers; i++) {
+		string name;
+		cout << "¬ведите им€ игрокає" << i+1;
+		cin >> name;
+		player[i] = new Player(name, i);
+	}
+}
 Game::~Game() {
-	for (int i = 0; i < 2; i++) 
+	for (int i = 0; i < 8; i++) 
 	{
 		delete(player[i]);
 	}

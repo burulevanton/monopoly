@@ -6,6 +6,7 @@ Property::Property(string name, int cost, int rent,string color) :Field(name) {
 	this->mRent = rent;
 	this->mOwner = -1;
 	this->mColourGroup = color;
+	this->isMortgage = false;
 }
 int Property::getCost() {
 	return mCost;
@@ -19,7 +20,7 @@ int Property::getRent() {
 string Property::getColourGroup() {
 	return mColourGroup;
 }
-void Property::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2) {
+void Property::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2, int numOfPlayers) {
 	int toPay = 0;
 	cout << player[playerNum]->getName() << "popal na" << this->getName() << endl;
 	if (mOwner < 0) {
@@ -27,6 +28,8 @@ void Property::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int
 			player[playerNum]->decBalance(mCost);
 			cout << player[playerNum]->getName() << " kupil " << this->getName()<<" za "<<mCost << endl;
 			mOwner = playerNum;
+			player[playerNum]->setOwnedColor(mColourGroup);
+			player[playerNum]->setSpendMoney(true);
 		}
 		else
 		{
@@ -34,7 +37,7 @@ void Property::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int
 		}
 	}
 	else if (mOwner != playerNum) {
-		if (player[mOwner]->getOwned(mColourGroup) == true) {
+		if (player[mOwner]->getOwnedColor(mColourGroup) == true) {
 			toPay = mRent + mRent;
 			player[playerNum]->decBalance(toPay);
 			player[mOwner]->addBalance(toPay);
@@ -46,6 +49,18 @@ void Property::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int
 		}
 		cout << player[playerNum]->getName() << " zaplatil " << toPay << " za arendu" << endl;
 	}
+}
+void Property::setMortgage() {
+	isMortgage = true;
+}
+void Property::unsetMortgage() {
+	isMortgage = false;
+}
+bool Property::checkMortgage() {
+	return isMortgage;
+}
+void Property::unsetOwner(){
+	mOwner = -1;
 }
 Property::~Property() {
 

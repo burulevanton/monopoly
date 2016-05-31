@@ -4,7 +4,7 @@
 
 Chance::Chance(string name) :Field(name) {
 }
-void Chance::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2) {
+void Chance::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2, int numOfPlayers) {
 	int numCard = 0;
 	cout << player[playerNum]->getName() << " popal na " << this->getName() << endl;
 	numCard = getChanceCard(q1);
@@ -43,7 +43,7 @@ void Chance::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> 
 		break;
 	case 4:
 		cout << "Заплатите каждому игроку 50" << endl;
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < numOfPlayers; i++) {
 			if (i != playerNum) {
 				player[i]->addBalance(50);
 				player[playerNum]->decBalance(50);

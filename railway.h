@@ -7,7 +7,7 @@ private:
 	int mOwner;
 public:
 	Railway(string name);
-	virtual void doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2);
+	virtual void doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2, int numOfPlayers);
 
 	int getOwner();
 

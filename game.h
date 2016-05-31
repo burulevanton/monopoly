@@ -21,13 +21,17 @@
 class Game {
 private:
 	vector <Field*> board;
-	Player * player[2];
+	int numOfPlayers;
+	Player* player[8];
 	queue <int> cardChance;
 	queue <int> cardTreasury;
 public:
 	Game();
+	void setNumOfPlayers();
+	void setPlayers();
 	void playRound();
 	void fillQueue(queue <int> &q);
+	void checkPlayerBalance(Player * player[],int playerNum);
 	~Game();
 };
 #endif

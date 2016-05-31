@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 using namespace std;
+class Field;
 class Player
 {
 private:
@@ -15,9 +16,13 @@ private:
 	int mLocation;
 	int mRoll1;
 	int mRoll2;
+	bool inGame;
+	bool spendMoney;
 	vector <string> mColourGroupOwned;
 	vector <string> mRailwayOwned;
 	vector <string> mUtilityOwned;
+	vector <Field*> mOwnedProperties;
+	vector <Field*> mMortgageProperties;
 public:
 	Player(string name, int numPlayer);
 
@@ -28,13 +33,21 @@ public:
 	int getBalance();
 	void addBalance(int add);
 	void decBalance(int dec);
-
+	bool getSpendMoney();
+	void setSpendMoney(bool);
 	int getLocation();
 	void setLocation(int loc);
-
-	bool getOwned(string color);
-	void setOwned(string color);
-
+	void quitGame();
+	bool checkQuit();
+	bool getOwnedColor(string color);
+	void setOwnedColor(string color);
+	void setOwnedProperty(Field*);
+	void setMortgage(Field*);
+	void removeMortgage();
+	int getPropertiesAmount();
+	int getMortgageAmount();
+	Field* getMortgages(int);
+	Field* getProperties(int);
 	void setOwnedRailway(string railway);
 	int getOwnedRailway();
 

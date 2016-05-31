@@ -3,14 +3,14 @@
 Treasury::Treasury(string name) :Field(name) {
 
 }
-void Treasury::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2) {
+void Treasury::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2, int numOfPlayers) {
 	int numCard = 0;
 	cout << player[playerNum]->getName() << " popal na " << this->getName() << endl;
 	numCard = getTreasuryCard(q2);
 	switch (numCard) {
 	case 1:
 		cout << "Получите по 10 от каждого игрока" << endl;
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < numOfPlayers; i++) {
 			if (i != playerNum) {
 				player[i]->decBalance(10);
 				player[playerNum]->addBalance(10);

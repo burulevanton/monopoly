@@ -15,7 +15,7 @@ private:
 	string mName;
 public:
 	Field(string name);
-	virtual void doTurn(Player * player[], int playerNum, queue<int> &q1, queue<int> &q2) = 0;
+	virtual void doTurn(Player * player[], int playerNum, queue<int> &q1, queue<int> &q2,int numOfPlayers) = 0;
 	
 	string getName();
 
