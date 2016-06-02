@@ -1,7 +1,13 @@
 #ifndef GAME_H
 #define GAME_H
 #pragma once
+<<<<<<< HEAD
 
+=======
+#include <queue>
+#include <deque>
+#include <algorithm>
+>>>>>>> dev
 #include <string>
 #include <vector>
 #include "player.h"
@@ -15,6 +21,7 @@
 #include "publicTreasury.h"
 #include "railway.h"
 #include "tax.h"
+<<<<<<< HEAD
 class Game {
 private:
 	vector <Field*> board;
@@ -22,6 +29,30 @@ private:
 public:
 	Game();
 	void playRound();
+=======
+#include "utility.h"
+#include "purchased.h"
+class Game {
+private:
+	vector <Field*> board;
+	int numOfPlayers;
+	Player* player[8];
+	queue <int> cardChance;
+	queue <int> cardTreasury;
+public:
+	Game();
+	void setNumOfPlayers();
+	void setPlayers();
+	void playRound();
+	void askUpgrade(int);
+	void fillQueue(queue <int> &q);
+	void unMortgage(int);
+	void printInfo(int);
+	void ask(int);
+	void rules();
+	vector <int> availableUpgrade(Player*player[], int playerNum, int searchsize);
+	void checkPlayerBalance(Player * player[],int playerNum);
+>>>>>>> dev
 	~Game();
 };
 #endif
