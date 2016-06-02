@@ -18,11 +18,16 @@ private:
 	int mRoll2;
 	bool inGame;
 	bool spendMoney;
+	bool cantBuy;
+	//bool needUpgrade;
+	int noMoney;
 	vector <string> mColourGroupOwned;
-	vector <string> mRailwayOwned;
-	vector <string> mUtilityOwned;
-	vector <Field*> mOwnedProperties;
-	vector <Field*> mMortgageProperties;
+	int mRailwayOwned;
+	int mUtilityOwned;
+	vector <int> mFieldsOwned;
+	vector <int> mFieldsMortgage;
+	//vector <Field*> mOwnedProperties;
+	//vector <Field*> mMortgageProperties;
 public:
 	Player(string name, int numPlayer);
 
@@ -30,28 +35,59 @@ public:
 	
 	int getPlayerNum();
 
+	void setCantBuy(bool);
+	bool getCantBuy();
+
+	//void setUpgrade(bool);
+	//bool getUpgrade();
+	void removeColor(string,int);
 	int getBalance();
 	void addBalance(int add);
 	void decBalance(int dec);
+
 	bool getSpendMoney();
 	void setSpendMoney(bool);
+
 	int getLocation();
 	void setLocation(int loc);
+
 	void quitGame();
 	bool checkQuit();
-	bool getOwnedColor(string color);
+
+	void ownField(int);
+	int sizeOfVect();
+	int getNumOfField(int);
+
+	void mortgageField(int);
+	int getSizeOfMortV();
+	int getNumOfMortgage(int);
+
+	void setNoMoney(int);
+	int getNoMoney();
+
+	vector <string> getOwnedColor();
 	void setOwnedColor(string color);
-	void setOwnedProperty(Field*);
-	void setMortgage(Field*);
-	void removeMortgage();
-	int getPropertiesAmount();
-	int getMortgageAmount();
-	Field* getMortgages(int);
-	Field* getProperties(int);
-	void setOwnedRailway(string railway);
+
+	//void setOwnedProperty(Field*);
+
+	//void setMortgage(Field*);
+	void removeMortgage(int);
+	void removeInOwn(int);
+
+	//int getPropertiesAmount();
+
+	//int getMortgageAmount();
+
+	//Field* getMortgages(int);
+
+	//Field* getProperties(int);
+
+	void setOwnedRailway();
+	void setMortgageRailway(int);
 	int getOwnedRailway();
 
-	void setOwnedUtility(string utility);
+	void setOwnedUtility();
+	void setMortgageUtility(int);
 	int getOwnedUtility();
 
 	void RollDice();

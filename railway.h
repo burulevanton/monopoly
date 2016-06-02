@@ -1,16 +1,20 @@
 #ifndef RAILWAY_H
 #define RAILWAY_H
 #pragma once
-#include "field.h"
-class Railway :public Field {
-private:
-	int mOwner;
+#include "purchased.h"
+class Railway :public Purchased {
 public:
-	Railway(string name);
-	virtual void doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2, int numOfPlayers);
-
-	int getOwner();
-
+	Railway(string name, int location, int cost, int rent, int costOfHouse, int rent1, int rent2, int rent3, int rent4, int rent5);
+	void printInfo(Player* player[], int playerNum);
+	void printMortgageInfo(Player* player[], int playerNum);
+	int costOfMortage(Player*player[], int playerNum);
+	int askPlayer(Player* player[], int playerNum);
+	void askForUpgrade(Player* player[],int playerNum);
+	int allowUpgrade(Player* player[], int playerNum);
+	void setMortgage(Player* player[], int playerNum,int i);
+	void unsetMortgage(Player* player[], int playerNum,int i);
+	void setOwned(Player* player[], int playerNum);
+	int getRent(Player* player[], int playerNum);
 	~Railway();
 };
 #endif

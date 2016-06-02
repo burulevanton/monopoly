@@ -18,6 +18,7 @@
 #include "railway.h"
 #include "tax.h"
 #include "utility.h"
+#include "purchased.h"
 class Game {
 private:
 	vector <Field*> board;
@@ -30,7 +31,10 @@ public:
 	void setNumOfPlayers();
 	void setPlayers();
 	void playRound();
+	void askUpgrade(int);
 	void fillQueue(queue <int> &q);
+	void unMortgage(int);
+	vector <int> availableUpgrade(Player*player[], int playerNum, int searchsize);
 	void checkPlayerBalance(Player * player[],int playerNum);
 	~Game();
 };

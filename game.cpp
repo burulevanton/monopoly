@@ -6,85 +6,85 @@ Game::Game() {
 	setNumOfPlayers();
 	setPlayers();
 	Field *field[40];
-	field[0] = new Forward("Vpered");
+	field[0] = new Forward("Вперёд",0);
 	board.push_back(field[0]);
-	field[1] = new Property("Zhitnaya", 60, 2,"brown");
+	field[1] = new Property("ул.Житная",1, 60, 2,50,10,30,90,160,250, "коричневый");
 	board.push_back(field[1]);
-	field[2] = new Treasury("Kazna");
+	field[2] = new Treasury("Общественная казна",2);
 	board.push_back(field[2]);
-	field[3] = new Property("Nagatinskaya", 60, 4,"brown");
+	field[3] = new Property("ул. Нагатинская",3, 60, 4,50,20,60,180,320,450, "коричневый");
 	board.push_back(field[3]);
-	field[4] = new Tax("Nalog", 200);
+	field[4] = new Tax("Налог",4, 200);
 	board.push_back(field[4]);
-	field[5] = new Railway("Rimskaya doroga");
+	field[5] = new Railway("Римская железная дорога",5,200,25,100,50,100,200,300,400);
 	board.push_back(field[5]);
-	field[6] = new Property("Varshavskoe", 100, 6,"blue");
+	field[6] = new Property("Варшавское шоссе",6, 100, 6,50,30,90,270,400,550, "голубой");
 	board.push_back(field[6]);
-	field[7] = new Chance("SHANS");
+	field[7] = new Chance("Шанс",7);
 	board.push_back(field[7]);
-	field[8] = new Property("Ogareva", 100, 6,"blue");
+	field[8] = new Property("ул.Огарева",8, 100, 6,50,30,90,270,400,550, "голубой");
 	board.push_back(field[8]);
-	field[9] = new Property("Pervaya parkovaya", 120, 8,"blue");
+	field[9] = new Property("ул. Первая Парковая",9, 120, 8,50,40,100,300,450,600, "голубой");
 	board.push_back(field[9]);
-	field[10] = new Jail("Tur'ma");
+	field[10] = new Jail("Тюрьма",10);
 	board.push_back(field[10]);
-	field[11] = new Property("Polyanka", 140, 10,"pink");
+	field[11] = new Property("ул.Полянка",11, 140, 10,100,50,150,450,625,750, "розовый");
 	board.push_back(field[11]);
-	field[12] = new Utility("Electric");
+	field[12] = new Utility("Электроэнергия",12,150, 4, 150, 8, 16, 24, 32, 40);
 	board.push_back(field[12]);
-	field[13] = new Property("Sretenka", 140, 10,"pink");
+	field[13] = new Property("ул.Сретенка",13, 140, 10,100,50,150,450,625,750, "розовый");
 	board.push_back(field[13]);
-	field[14] = new Property("Rostovskaya nab", 160, 12,"pink");
+	field[14] = new Property("Ростовская набережная",14, 160, 12,100,60,180,500,700,900, "розовый");
 	board.push_back(field[14]);
-	field[15] = new Railway("Kurskaya");
+	field[15] = new Railway("Курская железная дорога",15, 200, 25, 100, 50, 100, 200,300, 400);
 	board.push_back(field[15]);
-	field[16] = new Property("Ryazanskii", 180, 14,"orange");
+	field[16] = new Property("Рязанский проспект",16, 180, 14,100,70,200,550,750,950, "оранжевый");
 	board.push_back(field[16]);
-	field[17] = new Treasury("Kazna");
+	field[17] = new Treasury("Общественная казна",17);
 	board.push_back(field[17]);
-	field[18] = new Property("Vavilova", 180, 14,"orange");
+	field[18] = new Property("ул.Вавилова",18, 180, 14,100,70,200,550,750,950, "оранжевый");
 	board.push_back(field[18]);
-	field[19] = new Property("Rublevka", 200, 16,"orange");
+	field[19] = new Property("Рублевское шоссе",19, 200, 16,100,80,220,600,800,1000, "оранжевый");
 	board.push_back(field[19]);
-	field[20] = new FreeParking("Besplatnaya stoyanka");
+	field[20] = new FreeParking("Бесплатная стоянка",20);
 	board.push_back(field[20]);
-	field[21] = new Property("Tverskaya", 220, 18,"red");
+	field[21] = new Property("ул.Тверская",21, 220, 18,150,90,250,700,875,1050, "красный");
 	board.push_back(field[21]);
-	field[22] = new Chance("SHANS");
+	field[22] = new Chance("Шанс",22);
 	board.push_back(field[22]);
-	field[23] = new Property("Pushkinskaya", 220, 18,"red");
+	field[23] = new Property("ул.Пушкинская",23, 220, 18,150,90,250,700,875,1050, "красный");
 	board.push_back(field[23]);
-	field[24] = new Property("Mayakovskogo", 240, 20,"red");
+	field[24] = new Property("Площадь Маяковского",24, 240, 20,150,100,300,750,925,1100, "красный");
 	board.push_back(field[24]);
-	field[25] = new Railway("Kazanskaya doroga");
+	field[25] = new Railway("Казанская железная дорога",25, 200, 25, 100, 50, 100, 200,300,400);
 	board.push_back(field[25]);
-	field[26] = new Property("Gruzinskyi val", 260, 22,"yellow");
+	field[26] = new Property("ул.Грузинский вал",26, 260, 22,150,110,330,800,975,1150, "жёлтый");
 	board.push_back(field[26]);
-	field[27] = new Property("Chaikovskogo", 260, 22,"yellow");
+	field[27] = new Property("ул.Чайковского",27, 260, 22,150,110,330,800,975,1150,"жёлтый");
 	board.push_back(field[27]);
-	field[28] = new Utility("Vodoprovod");
+	field[28] = new Utility("Водопровод",28,150,4,75,8,16,24,32,40);
 	board.push_back(field[28]);
-	field[29] = new Property("Smolenskaya ploshad'", 280, 24,"yellow");
+	field[29] = new Property("Смоленская площадь",29, 280, 24,150,120,360,850,1025,1200, "жёлтый");
 	board.push_back(field[29]);
-	field[30] = new GoToJail("Go v tur'mu");
+	field[30] = new GoToJail("Отправляйтесь в тюрьму",30);
 	board.push_back(field[30]);
-	field[31] = new Property("Shuseva", 300, 26,"green");
+	field[31] = new Property("ул.Щусева",31, 300, 26,200,130,390,900,1100,1275, "зелёный");
 	board.push_back(field[31]);
-	field[32] = new Property("Gogolevskyi bulvar", 300, 26,"green");
+	field[32] = new Property("Гоголевский бульвар",32, 300, 26,200,130,390,900,1100,1275, "зелёный");
 	board.push_back(field[32]);
-	field[33] = new Treasury("Kazna");
+	field[33] = new Treasury("Общественная казна",33);
 	board.push_back(field[33]);
-	field[34] = new Property("Kutuzovskyi", 320, 28,"green");
+	field[34] = new Property("Кутузовский проспект",34, 320, 28,200,150,450,1000,1200,1400, "зелёный");
 	board.push_back(field[34]);
-	field[35] = new Railway("Leningradskya doroga");
+	field[35] = new Railway("Ленинградская железная дорога",35, 200, 25, 100, 50, 100, 200,300,400);
 	board.push_back(field[35]);
-	field[36] = new Chance("SHANS");
+	field[36] = new Chance("Шанс",36);
 	board.push_back(field[36]);
-	field[37] = new Property("Malaya Bronnaya", 350, 35,"darkblue");
+	field[37] = new Property("ул.Малая Бронная",37, 350, 35,200,175,500,1100,1300,1500, "синий");
 	board.push_back(field[37]);
-	field[38] = new Tax("Sverhnalog", 100);
+	field[38] = new Tax("Сверхналог",38, 100);
 	board.push_back(field[38]);
-	field[39] = new Property("Arbat", 400, 50,"darkblue");
+	field[39] = new Property("ул.Арбат",39, 400, 50,200,200,600,1400,1700,2000, "синий");
 	board.push_back(field[39]);
 	
 	for (int i = 0; i <40; i++) {
@@ -95,26 +95,110 @@ Game::Game() {
 }
 void Game::playRound() {
 	int numOfActivePlayers = numOfPlayers;
+	int numOfTurn = 1;
 	while(numOfActivePlayers>1) {
 		numOfActivePlayers = 0;
 		for (int j = 0; j < numOfPlayers; j++) {
-			if (player[j]->checkQuit() == false) {
-				player[j]->RollDice();
-				board[player[j]->getLocation()]->doTurn(player, j, cardChance, cardTreasury,numOfPlayers);
-				if (player[j]->checkChanges()) {
-					board[player[j]->getLocation()]->doTurn(player, j, cardChance, cardTreasury,numOfPlayers);
-					player[j]->setChanges(false);
-				}
-				if (player[j]->getSpendMoney() == true) {
-					player[j]->setOwnedProperty(board[player[j]->getLocation()]);
-					player[j]->setSpendMoney(false);
-				}
-				//cout << player[j]->getName() << " imeet " << player[j]->getBalance() << endl;
-				checkPlayerBalance(player, j);
-				cout << "-----------------------------------------" << endl;
+			if (j == numOfPlayers - 1 && numOfActivePlayers == 0) {
+				numOfActivePlayers = 1;
+				break;
 			}
-			if (player[j]->checkQuit() == false) {
+		cout << "************************************************" << endl;
+		cout << "ХОД №" << numOfTurn << endl;
+		cout << "************************************************" << endl;
+		if (player[j]->checkQuit() == false) {
+			player[j]->setNoMoney(1);
+			player[j]->RollDice();
+			board[player[j]->getLocation()]->doTurn(player, j, cardChance, cardTreasury,numOfPlayers);
+			if (player[j]->checkChanges()) {
+				board[player[j]->getLocation()]->doTurn(player, j, cardChance, cardTreasury,numOfPlayers);
+				player[j]->setChanges(false);
+			}
+			askUpgrade(j);
+			checkPlayerBalance(player, j);
+			cout << "-----------------------------------------" << endl;
+		}
+		if (player[j]->checkQuit() == false) {
 				numOfActivePlayers++;
+		}
+		}
+		for (int i = 0; i < numOfPlayers; i++) {
+			int searchSize = player[i]->getSizeOfMortV();
+			int j = 0;
+			while(j!=player[i]->getSizeOfMortV()){
+				Purchased* tmp = dynamic_cast<Purchased*>(board[player[i]->getNumOfMortgage(j)]);
+				if (tmp->upTurns() == true) {
+					tmp->unsetOwner(player,i,j);
+				}
+				else {
+					j++;
+				}
+			}
+		}
+		numOfTurn++;
+	}
+	for (int i = 0; i < numOfPlayers; i++) {
+		if (player[i]->checkQuit() == false) {
+			cout << "Победил " << player[i]->getName() << endl;;
+		}
+	}
+}
+vector <int> Game::availableUpgrade(Player*player[], int playerNum,int searchsize) {
+	vector<int>upgrades;
+	for (int i = 0; i < searchsize; i++) {
+		Purchased* tmp = dynamic_cast<Purchased*>(board[player[playerNum]->getNumOfField(i)]);
+		int check = tmp->allowUpgrade(player, playerNum);
+		if (check != 0) {
+			upgrades.push_back(check);
+		}
+	}
+	return upgrades;
+}
+void Game::askUpgrade(int playerNum) {
+	vector<int>upgrades;
+	if (player[playerNum]->getBalance() > 0) {
+		int searchSize = player[playerNum]->sizeOfVect();
+		if (searchSize == 0) {
+			cout << "Нечего улучшать" << endl;
+			return;
+		}
+		else {
+			upgrades = availableUpgrade(player, playerNum, searchSize);
+			searchSize = upgrades.size();
+			if (searchSize == 0) {
+				return;
+			}
+		}
+		cout << player[playerNum]->getName() << "вы можете улучшить ваши владения:" << endl;
+		for (int i = 0; i < searchSize; i++) {
+			int numOfField = upgrades[i];
+			Purchased * tmp = dynamic_cast<Purchased*>(board[numOfField]);
+			cout << i + 1 << ") ";
+			tmp->printInfo(player,playerNum);
+		}
+		cout << "0)Ничего не делать" << endl;
+		cout << ":";
+		int answer;
+		cin >> answer;
+		if (answer == 0) {
+			return;
+		}
+		else {
+			int numOfField = upgrades[answer - 1];
+			Purchased * tmp1 = dynamic_cast<Purchased*>(board[numOfField]);
+			tmp1->setUpgrade(player, playerNum);
+			cout << "Хотите ещё что-нибудь улучшить?" << endl;
+			cout << "1)Да" << endl;
+			cout << "2)Нет" << endl;
+			cout << ":";
+			cin >> answer;
+			switch (answer) {
+			case 1:
+				askUpgrade(playerNum);
+				break;
+			case 2:
+				return;
+				break;
 			}
 		}
 	}
@@ -129,46 +213,85 @@ void Game::fillQueue(queue <int> &q) {
 		q.push(dop[i]);
 	}
 }
+void Game::unMortgage(int playerNum) {
+	cout << "Вы можете выкупить свою собственность" << endl;
+	cout << "Выберите собственность для выкупа" << endl;
+	for (int i = 0; i < player[playerNum]->getSizeOfMortV(); i++) {
+		Purchased* tmp = dynamic_cast<Purchased*>(board[player[playerNum]->getNumOfMortgage(i)]);
+		cout << i + 1;
+		tmp->printUnMortgageInfo(player, playerNum);
+	}
+	int answer;
+	cin >> answer;
+	if (answer == 0) {
+		cout << "Помните, что если вы не выкупите свою собственность меньше чем за 10 ходов, она станет доступной для покупки всем";
+		return;
+	}
+	else {
+		Purchased* tmp = dynamic_cast<Purchased*>(board[player[playerNum]->getNumOfMortgage(answer-1)]);
+		tmp->unsetMortgage(player, playerNum, answer - 1);
+		if (player[playerNum]->getSizeOfMortV() > 0) {
+			cout << "Хотите ещё?" << endl;
+			cout << "1)Да" << endl;
+			cout << "2)Нет" << endl;
+			cout << ":";
+			cin >> answer;
+			switch (answer) {
+			case 1:
+				unMortgage(playerNum);
+				break;
+			case 2:
+				return;
+				break;
+			}
+		}
+	}
+}
 void Game::checkPlayerBalance(Player *player[],int playerNum) {
 	if (player[playerNum]->getBalance() < 0) {
-		int count = 0;
-		while (player[playerNum]->getBalance() < 0) {
-			Property* pointer = dynamic_cast<Property*>(player[playerNum]->getProperties(count));
-			player[playerNum]->setMortgage(player[playerNum]->getProperties(count));
-			pointer->setMortgage();
-			player[playerNum]->addBalance((pointer->getCost()) / 2);
-			cout << player[playerNum]->getName() << "заложил" << pointer->getName() << endl;
-			delete(pointer);
-			count++;
+		int searchsize = player[playerNum]->sizeOfVect();
+		while(player[playerNum]->getBalance() <0 && player[playerNum]->sizeOfVect()!=0)
+		{	
+			cout << "У вас отрицательный баланс, вам необходимо заложить свою собственность" << endl;
+			cout << "Выберите собственность:" << endl;
+			for (int i = 0; i < player[playerNum]->sizeOfVect() ;i++) {
+				Purchased* tmp = dynamic_cast<Purchased*>(board[player[playerNum]->getNumOfField(i)]);
+				cout << i + 1;
+				tmp->printMortgageInfo(player, playerNum);
+			}
+			cout << "0)Выход из игры" << endl;
+			cout << ":";
+			int answer;
+			cin >> answer;
+			if (answer == 0) {
+				player[playerNum]->quitGame();
+				return;
+			}
+			else {
+				Purchased* tmp = dynamic_cast<Purchased*>(board[player[playerNum]->getNumOfField(answer-1)]);
+				tmp->setMortgage(player, playerNum, answer - 1);
+			}
+		}
+		if (player[playerNum]->getBalance() < 0 && player[playerNum]->sizeOfVect() == 0) {
+			player[playerNum]->quitGame();
+			int size = player[playerNum]->getSizeOfMortV();
+			for (int i = 0; i < size; i++) {
+				board[player[playerNum]->getNumOfMortgage(i)]->doTurn(player, playerNum, cardChance, cardTreasury, numOfPlayers);
+			}
+		}
+		if (player[playerNum]->getBalance() > 0) {
+			cout << player[playerNum]->getName() << " имеет " << player[playerNum]->getBalance() << endl;
 		}
 	}
-	else if (player[playerNum]->getBalance() > 0) {
-		while (player[playerNum]->getBalance() > 0 && player[playerNum]->getMortgageAmount() != 0) {
-			int count = 0;
-			Property* pointer = dynamic_cast<Property*>(player[playerNum]->getMortgages(count));
-			player[playerNum]->decBalance((pointer->getCost()) / 2);
-			cout << player[playerNum]->getName() << "выкупил"<<pointer->getName() << endl;
-			pointer->unsetMortgage();
-			delete(pointer);
-			count++;
-		}
+	else if (player[playerNum]->getBalance() > 0 && player[playerNum]->getSizeOfMortV() != 0) {
+		unMortgage(playerNum);
 	}
-	if (player[playerNum]->getBalance() < 0 && player[playerNum]->getMortgageAmount() == 0) {
-		cout << player[playerNum]->getName() << "покидает игру" << endl;
-		player[playerNum]->quitGame();
-		int searchSize = player[playerNum]->getPropertiesAmount();
-		for (int i = 0; i < searchSize; i++) {
-			Property* pointer = dynamic_cast<Property*>(player[playerNum]->getProperties(i));
-			pointer->unsetMortgage();
-			pointer->unsetOwner();
-		}
-	}
-	if (player[playerNum]->checkQuit()==false) {
-		cout << player[playerNum]->getName() << "имеет " << player[playerNum]->getBalance() << endl;
+	else {
+		cout << player[playerNum]->getName() << " имеет " << player[playerNum]->getBalance() << endl;
 	}
 }
 void Game::setNumOfPlayers() {
-	cout << "Введите количество игроков ";
+	cout << "Введите количество игроков: ";
 	int num;
 	cin >> num;
 	if (num > 1 && num <= 8)
@@ -182,7 +305,7 @@ void Game::setNumOfPlayers() {
 void Game::setPlayers() {
 	for (int i = 0; i < numOfPlayers; i++) {
 		string name;
-		cout << "Введите имя игрока№" << i+1;
+		cout << "Введите имя игрока№" << i+1<<": ";
 		cin >> name;
 		player[i] = new Player(name, i);
 	}

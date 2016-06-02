@@ -6,7 +6,7 @@ class Tax :public Field {
 private:
 	int mCost;
 public:
-	Tax(string name,int cost);
+	Tax(string name, int location,int cost);
 
 	void doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2, int numOfPlayers);
 

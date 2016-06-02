@@ -4,7 +4,7 @@
 #include "field.h"
 class GoToJail :public Field {
 public:
-	GoToJail(string name);
+	GoToJail(string name, int location);
 
 	void doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2, int numOfPlayers);
 

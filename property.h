@@ -5,30 +5,26 @@
 #include <string>
 
 #include "player.h"
-#include "field.h"
+#include "purchased.h"
 
-class Property : public Field
+class Property : public Purchased
 {
 private:
-	int mCost;
-	int mRent;
-	int mOwner;
 	string mColourGroup;
-	bool isMortgage;
 public:
-	Property(string name, int cost, int rent,string color);
-	void doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2, int numOfPlayers);
-
-	int getCost();
-	int getRent();
-	int getOwner();
-	void unsetOwner();
-	bool checkMortgage();
+	Property(string name, int location, int cost, int rent,int costOfUpgrade,int rent1,int rent2,int rent3,int rent4,int rent5,string color);
+	void printInfo(Player* player[], int playerNum);
+	int askPlayer(Player* player[], int playerNum);
+	void askForUpgrade(Player* player[], int playerNum);
 	string getColourGroup();
-
-	void setMortgage();
-	void unsetMortgage();
-
+	int costOfMortage(Player*player[], int playerNum);
+	void printMortgageInfo(Player* player[], int playerNum);
+	int allowUpgrade(Player* player[], int playerNum);
+	void setMortgage(Player* player[],int playerNum,int i);
+	void unsetMortgage(Player* player[],int playerNum,int i);
+	void setOwned(Player* player[], int playerNum);
+	int getRent(Player* player[], int playerNum);
+	int rentWithoutUpgrades(Player* player[], int playerNum);
 	~Property();
 };
 #endif

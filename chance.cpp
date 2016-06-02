@@ -2,11 +2,11 @@
 #include "player.h"
 #include <vector>
 
-Chance::Chance(string name) :Field(name) {
+Chance::Chance(string name, int location) :Field(name,location) {
 }
 void Chance::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2, int numOfPlayers) {
 	int numCard = 0;
-	cout << player[playerNum]->getName() << " popal na " << this->getName() << endl;
+	cout << player[playerNum]->getName() << " попал на поле " << this->getName() << endl;
 	numCard = getChanceCard(q1);
 	switch (numCard) {
 	case 1:
@@ -27,7 +27,7 @@ void Chance::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> 
 		player[playerNum]->setChanges(true);
 		break;
 	case 3:
-		cout << " Отправляйтесь на ближайшую станцию " << endl;
+		cout << "Отправляйтесь на ближайшую станцию " << endl;
 		if (player[playerNum]->getLocation() == 7) {
 			player[playerNum]->setLocation(15);
 		}
@@ -81,7 +81,7 @@ void Chance::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> 
 		player[playerNum]->setChanges(true);
 		break;
 	case 9:
-		cout << " Отправляйтесь на ближайшую станцию " << endl;
+		cout << "Отправляйтесь на ближайшую станцию " << endl;
 		if (player[playerNum]->getLocation() == 7) {
 			player[playerNum]->setLocation(15);
 		}
@@ -112,7 +112,7 @@ void Chance::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> 
 		player[playerNum]->setChanges(true);
 		break;
 	case 12:
-		cout << " Получите 150" << endl;
+		cout << "Получите 150" << endl;
 		player[playerNum]->addBalance(150);
 		break;
 	case 13:
@@ -128,12 +128,12 @@ void Chance::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> 
 		player[playerNum]->setChanges(true);
 		break;
 	case 14:
-		cout << " Вернитесь на три поля назад" << endl;
+		cout << "Вернитесь на три поля назад" << endl;
 		player[playerNum]->setLocation(player[playerNum]->getLocation() - 3);
 		player[playerNum]->setChanges(true);
 		break;
 	case 15:
-		cout << "Идите на поле вперед" << endl;
+		cout << "Идите на поле Вперед" << endl;
 		player[playerNum]->setLocation(0);
 		player[playerNum]->addBalance(200);
 		cout << player[playerNum]->getName() << " проходит поле Вперед и получает 200" << endl;

@@ -8,7 +8,7 @@
 class FreeParking :public Field
 {
 public:
-	FreeParking(string posName);
+	FreeParking(string posName, int location);
 	void doTurn(Player * player[], int playerNum, queue<int> &q1, queue<int> &q2, int numOfPlayers);
 
 	~FreeParking();

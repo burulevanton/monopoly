@@ -8,6 +8,10 @@ Player::Player(string name, int num) {
 	this->changeLocation = false;
 	this->inGame = true;
 	this->spendMoney = false;
+	this->noMoney = 1;
+	//this->needUpgrade = false;
+	this->mRailwayOwned = 0;
+	this->mUtilityOwned = 0;
 }
 
 string Player::getName() {
@@ -34,42 +38,32 @@ int Player::getBalance() {
 void Player::setOwnedColor(string color) {
 	mColourGroupOwned.push_back(color);
 }
-bool Player::getOwnedColor(string color) {
-	int searchSize = mColourGroupOwned.size();
-	int count = 0;
-	for (int i = 0; i < searchSize; i++) {
-		if (mColourGroupOwned[i] == color) {
-			count++;
-		}
-	}
-	if (color == "darkblue" || color == "brown") {
-		if (count == 2) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	else {
-		if (count == 3) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
+vector <string> Player::getOwnedColor() {
+	return mColourGroupOwned;
 }
-void Player::setOwnedRailway(string railway) {
-	mRailwayOwned.push_back(railway);
+void Player::setOwnedRailway() {
+	mRailwayOwned++;
 }
 int Player::getOwnedRailway() {
-	return mRailwayOwned.size();
+	return mRailwayOwned;
 }
-void Player::setOwnedUtility(string utility) {
-	mUtilityOwned.push_back(utility);
+void Player::setMortgageRailway(int numOfUpgrade) {
+	while (numOfUpgrade >= 0) {
+		mRailwayOwned--;
+		numOfUpgrade--;
+	}
+}
+void Player::setOwnedUtility() {
+	mUtilityOwned++;
 }
 int Player::getOwnedUtility() {
-	return mUtilityOwned.size();
+	return mUtilityOwned;
+}
+void Player::setMortgageUtility(int numOfUpgrade) {
+	while (numOfUpgrade >= 0) {
+		mUtilityOwned--;
+		numOfUpgrade--;
+	}
 }
 int Random() {
 	return  rand() % 6 + 1;
@@ -81,7 +75,7 @@ void Player::RollDice() {
 	mRoll2 = 0;
 	mRoll1 = Random();
 	mRoll2 = Random();
-	cout << mNamePlayer << " vibrasivaet " << mRoll1 <<" i " <<mRoll2<<endl;
+	cout << mNamePlayer << " выбрасывает " << mRoll1 <<" и " <<mRoll2<<endl;
 	previousLoc = mLocation;
 	int playerRoll = mRoll1 + mRoll2;
 	while (mLocation < previousLoc + playerRoll)
@@ -93,7 +87,7 @@ void Player::RollDice() {
 			mLocation = 0;
 			previousLoc = -1;
 			addBalance(200);
-			cout << mNamePlayer << " prohodit go i poluchaet 200" << endl;
+			cout << mNamePlayer << " проходит поле Вперёд и получает 200" << endl;
 		}
 		counter++;
 	}
@@ -104,11 +98,15 @@ int Player::getRoll() {
 bool Player::checkChanges() {
 	return changeLocation;
 }
-void Player::setOwnedProperty(Field* property) {
+void Player::setChanges(bool change) {
+	this->changeLocation = change;
+}
+/*void Player::setOwnedProperty(Field* property) {
 	mOwnedProperties.push_back(property);
 }
 void Player::setMortgage(Field* mortgage) {
 	mMortgageProperties.push_back(mortgage);
+	mOwnedProperties.erase(mOwnedProperties.begin());
 }
 int Player::getPropertiesAmount() {
 	return mOwnedProperties.size();
@@ -116,16 +114,14 @@ int Player::getPropertiesAmount() {
 int Player::getMortgageAmount(){
 	return mMortgageProperties.size();
 }
-void Player::setChanges(bool change) {
-	this->changeLocation = change;
-}
 Field* Player::getMortgages(int num) {
 	return mMortgageProperties[num];
 }
 Field* Player::getProperties(int num) {
 	return mOwnedProperties[num];
-}
+}*/
 void Player::quitGame() {
+	cout << this->getName() << " покидает игру" << endl;
 	inGame = false;
 }
 bool Player::checkQuit() {
@@ -140,6 +136,61 @@ bool Player::getSpendMoney() {
 }
 void Player::setSpendMoney(bool money) {
 	spendMoney = money;
+}
+void Player::setCantBuy(bool can) {
+	this->cantBuy = can;
+}
+bool Player::getCantBuy() {
+	return cantBuy;
+}
+void Player::removeMortgage(int i) {
+	mFieldsOwned.push_back(mFieldsMortgage[i]);
+	mFieldsMortgage.erase(mFieldsMortgage.begin()+i);
+}
+void Player::removeInOwn(int i) {
+	mFieldsMortgage.erase(mFieldsMortgage.begin() + i);
+}
+void Player::ownField(int num) {
+	mFieldsOwned.push_back(num);
+}
+int Player::sizeOfVect() {
+	return mFieldsOwned.size();
+}
+int Player::getNumOfField(int num) {
+	return mFieldsOwned[num];
+}
+void Player::mortgageField(int i) {
+	mFieldsMortgage.push_back(mFieldsOwned[i]);
+	mFieldsOwned.erase(mFieldsOwned.begin()+i);
+}
+int Player::getSizeOfMortV() {
+	return mFieldsMortgage.size();
+}
+int Player::getNumOfMortgage(int num) {
+	return mFieldsMortgage[num];
+}
+void Player::setNoMoney(int money) {
+	noMoney = money;
+}
+int Player::getNoMoney() {
+	return noMoney;
+}
+/*bool Player::getUpgrade(){
+	return needUpgrade;
+}
+void Player::setUpgrade(bool upgrade) {
+	needUpgrade = upgrade;
+}*/
+void Player::removeColor(string color,int numOfUpgrades) {
+	for (int i = 0; i < mColourGroupOwned.size(); i++) {
+		if (mColourGroupOwned[i] == color && numOfUpgrades>=0) {
+			mColourGroupOwned.erase(mColourGroupOwned.begin() + i);
+			numOfUpgrades--;
+		}
+		if (numOfUpgrades < 0) {
+			return;
+		}
+	}
 }
 Player::~Player() {
 

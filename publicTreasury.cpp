@@ -1,11 +1,11 @@
 #include "publicTreasury.h"
 #include "player.h"
-Treasury::Treasury(string name) :Field(name) {
+Treasury::Treasury(string name, int location) :Field(name,location) {
 
 }
 void Treasury::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2, int numOfPlayers) {
 	int numCard = 0;
-	cout << player[playerNum]->getName() << " popal na " << this->getName() << endl;
+	cout << player[playerNum]->getName() << " попадает на поле " << this->getName() << endl;
 	numCard = getTreasuryCard(q2);
 	switch (numCard) {
 	case 1:
@@ -18,7 +18,7 @@ void Treasury::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int
 		}
 		break;
 	case 2:
-		cout << " ќтправл€йтесь в тюрьму " << endl;
+		cout << "ќтправл€йтесь в тюрьму " << endl;
 		player[playerNum]->setLocation(10);
 		player[playerNum]->setChanges(true);
 		break;
