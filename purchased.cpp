@@ -56,17 +56,17 @@ void Purchased::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<in
 		return;
 	}
 	if (mOwner == playerNum) {
-		cout << player[playerNum]->getName() << " попадает на своЄ поле " << this->getName() << endl;
+		cout << player[playerNum]->getName() << " попадает на своЄ поле <" << this->getName()<<">" << endl;
 		cout << player[playerNum]->getName() << " отдохни " << endl;
 	}
 	if (mOwner < 0) {
-		cout << player[playerNum]->getName() << " попадает на поле " << this->getName() << endl;
+		cout << player[playerNum]->getName() << " попадает на поле <" << this->getName()<<">" << endl;
 		int answer = askPlayer(player, playerNum);
 		switch (answer) {
 		case 1:
 			if (player[playerNum]->getBalance() >= mCost) {
 				player[playerNum]->decBalance(mCost);
-				cout << player[playerNum]->getName() << " покупает " << this->getName() << " за " << mCost << " – " << endl;
+				cout << player[playerNum]->getName() << " покупает <" << this->getName() << "> за " << mCost << " – " << endl;
 				mOwner = playerNum;
 				this->setOwned(player, playerNum);
 			}
@@ -74,7 +74,7 @@ void Purchased::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<in
 			{
 				player[playerNum]->decBalance(mCost);
 				mOwner = playerNum;
-				cout << player[playerNum]->getName() << " покупает " << this->getName() << " и имеет отрицательный баланс" << player[playerNum]->getBalance() << endl;
+				cout << player[playerNum]->getName() << " покупает <" << this->getName() << "> и имеет отрицательный баланс" << player[playerNum]->getBalance() << endl;
 				this->setOwned(player, playerNum);
 			}
 			break;
@@ -85,7 +85,7 @@ void Purchased::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<in
 	}
 
 	else if (mOwner != playerNum) {
-		cout << player[playerNum]->getName() << " попадает на поле " << this->getName() << endl;
+		cout << player[playerNum]->getName() << " попадает на поле <" << this->getName()<<">" << endl;
 		int toPay=this->getRent(player, mOwner);
 		player[playerNum]->decBalance(toPay);
 		player[playerNum]->addBalance(toPay);

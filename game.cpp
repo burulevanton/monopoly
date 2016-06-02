@@ -3,6 +3,9 @@
 Game::Game() {
 	fillQueue(cardChance);
 	fillQueue(cardTreasury);
+	cout << "************************************************" << endl;
+	cout << "MONOPOLY" << endl;
+	cout << "************************************************" << endl;
 	setNumOfPlayers();
 	setPlayers();
 	Field *field[40];
@@ -91,35 +94,38 @@ Game::Game() {
 		field[i] = NULL;
 		delete(field[i]);
 	}
-	cout << "MONOPOLY" << endl;
 }
 void Game::playRound() {
 	int numOfActivePlayers = numOfPlayers;
 	int numOfTurn = 1;
 	while(numOfActivePlayers>1) {
 		numOfActivePlayers = 0;
+		cout << "************************************************" << endl;
+		cout << "ХОД №" << numOfTurn << endl;
+		cout << "************************************************" << endl;
 		for (int j = 0; j < numOfPlayers; j++) {
 			if (j == numOfPlayers - 1 && numOfActivePlayers == 0) {
 				numOfActivePlayers = 1;
 				break;
 			}
-		cout << "************************************************" << endl;
-		cout << "ХОД №" << numOfTurn << endl;
-		cout << "************************************************" << endl;
 		if (player[j]->checkQuit() == false) {
-			player[j]->setNoMoney(1);
-			player[j]->RollDice();
+			cout << player[j]->getName() << " ходит(баланс=" <<player[j]->getBalance()<<"P)"<< endl;
+			ask(j);
+			cout << "--------------------------------------------------" << endl;
+			if(player[j]->checkQuit()==false){
 			board[player[j]->getLocation()]->doTurn(player, j, cardChance, cardTreasury,numOfPlayers);
+			cout << "--------------------------------------------------" << endl;
 			if (player[j]->checkChanges()) {
 				board[player[j]->getLocation()]->doTurn(player, j, cardChance, cardTreasury,numOfPlayers);
 				player[j]->setChanges(false);
 			}
 			askUpgrade(j);
 			checkPlayerBalance(player, j);
-			cout << "-----------------------------------------" << endl;
+			cout << "////////////////////////////////////////////////////" << endl;
 		}
-		if (player[j]->checkQuit() == false) {
+			if (player[j]->checkQuit() == false) {
 				numOfActivePlayers++;
+			}
 		}
 		}
 		for (int i = 0; i < numOfPlayers; i++) {
@@ -143,6 +149,110 @@ void Game::playRound() {
 		}
 	}
 }
+void Game::ask(int playerNum) {
+	cout << "1)Бросить кубики" << endl;
+	cout << "2)Просмотреть информацию о себе" << endl;
+	cout << "3)Просмотреть информацию о других игроках" << endl;
+	cout << "4)Правила" << endl;
+	cout << "5)Выход из игры" << endl;
+	int answer;
+	cin >> answer;
+	cout << "--------------------------------------------------" << endl;
+	switch (answer) {
+	case 1: {
+		player[playerNum]->RollDice();
+		return;
+		break; }
+	case 2: {
+		printInfo(playerNum);
+		cout << "--------------------------------------------------" << endl;
+		if (player[playerNum]->getSizeOfMortV() != 0) {
+			cout << "Просмотреть что заложено?" << endl;
+			cout << "1)Да" << endl;
+			cout << "2)Нет" << endl;
+			cin >> answer;
+			while (answer < 1 || answer>2) {
+				cout << "Введены неверные числа" << endl;
+				cout << "Введите заново->";
+				cin >> answer;
+			}
+			switch (answer) {
+			case 1:
+				for (int i = 0; i < player[playerNum]->getSizeOfMortV(); i++) {
+					Purchased* tmp = dynamic_cast<Purchased*>(board[player[playerNum]->getNumOfMortgage(i)]);
+					cout << i + 1 << ")";
+					tmp->printMortgageInfo(player, playerNum);
+				}
+				cout << "--------------------------------------------------" << endl;
+				ask(playerNum);
+				break;
+			case 2:
+				ask(playerNum);
+				break;
+			}
+		}
+		else {
+			ask(playerNum);
+		}
+		break; }
+	case 3:{
+		for (int i = 0; i < numOfPlayers; i++) {
+			if (i != playerNum && player[i]->checkQuit() == false) {
+				printInfo(i);
+				cout << "--------------------------------------------------" << endl;
+			}
+		}
+		ask(playerNum);
+		break;
+	}
+	case 4: {
+		rules();
+		ask(playerNum);
+		break; }
+	case 5:
+		player[playerNum]->quitGame();
+		return;
+		break;
+	}
+}
+void Game::rules() {
+	cout << "Задача игры заключается в том, чтобы обанкротить других игроков" << endl;
+	cout << "Покупайте поля предприятий, улиц и тд, покупая поля одного типа(цвета), вы получите возможность улучшить их" << endl;
+	cout << "Улучшение приводит к повышению арендной платы, что ,несомненно, увеличивает ваш доход" << endl;
+	cout << "Если вы оказались в минусе, игра предложит вам заложить приобретенные вами поля" << endl;
+	cout << "Все построенные улучшения при закладывании недвижимости автоматически убираются" << endl;
+	cout << "Если вы не выкупите заложенное поле в течении 10 ходов, оно автоматически станет общедоступным для покупки, а вы потеряете на него права владельца" << endl;
+	cout << "Если вы окажитесь в минусе, и не будете владельцем полей, которые покроют Ваши долги, игра для вас закончится" << endl;
+	cout << "Просмотреть информацию о своих противниках или о себе можно только в начале своего хода" << endl;
+	cout << "--------------------------------------------------" << endl;
+}
+void Game::printInfo(int numOfPlayer) {
+	cout << "Баланс "<<player[numOfPlayer]->getName()<<"=" << player[numOfPlayer]->getBalance() << endl;
+	cout << player[numOfPlayer]->getName() << " имеет во владении" << endl;
+	cout << "полей коричневого цвета " << player[numOfPlayer]->getNumOfColor("коричневый") <<"/2"<< endl;
+	cout << "полей голубого цвета " << player[numOfPlayer]->getNumOfColor("голубой") <<"/3"<< endl;
+	cout << "полей розового цвета " << player[numOfPlayer]->getNumOfColor("розовый") << "/3" << endl;
+	cout << "полей оранжевого цвета " << player[numOfPlayer]->getNumOfColor("оранжевый") << "/3" << endl;
+	cout << "полей красного цвета " << player[numOfPlayer]->getNumOfColor("красный") << "/3" << endl;
+	cout << "полей жёлтого цвета " << player[numOfPlayer]->getNumOfColor("жёлтый") << "/3" << endl;
+	cout << "полей зелёного цвета " << player[numOfPlayer]->getNumOfColor("зелёный") << "/3" << endl;
+	cout << "полей синего цвета " << player[numOfPlayer]->getNumOfColor("синий") << "/2" << endl;
+	cout << "коммунальных предприятий ";
+	if (player[numOfPlayer]->getOwnedUtility() >= 2) {
+		cout << 2 << "/2" << endl;
+	}
+	else {
+		cout << player[numOfPlayer]->getOwnedUtility() << "/2" << endl;
+	}
+	cout << "железнодорожных станций ";
+	if (player[numOfPlayer]->getOwnedRailway() >= 4) {
+		cout << 4 << "/4" << endl;
+	}
+	else {
+		cout << player[numOfPlayer]->getOwnedRailway() << "/4" << endl;
+	}
+	cout << "заложено " << player[numOfPlayer]->getSizeOfMortV() << " поле(ей)" << endl;
+}
 vector <int> Game::availableUpgrade(Player*player[], int playerNum,int searchsize) {
 	vector<int>upgrades;
 	for (int i = 0; i < searchsize; i++) {
@@ -159,7 +269,7 @@ void Game::askUpgrade(int playerNum) {
 	if (player[playerNum]->getBalance() > 0) {
 		int searchSize = player[playerNum]->sizeOfVect();
 		if (searchSize == 0) {
-			cout << "Нечего улучшать" << endl;
+			cout << "Вам нечего улучшать" << endl;
 			return;
 		}
 		else {
@@ -169,7 +279,7 @@ void Game::askUpgrade(int playerNum) {
 				return;
 			}
 		}
-		cout << player[playerNum]->getName() << "вы можете улучшить ваши владения:" << endl;
+		cout << player[playerNum]->getName() << ", вы можете улучшить ваши владения:" << endl;
 		for (int i = 0; i < searchSize; i++) {
 			int numOfField = upgrades[i];
 			Purchased * tmp = dynamic_cast<Purchased*>(board[numOfField]);
@@ -218,7 +328,7 @@ void Game::unMortgage(int playerNum) {
 	cout << "Выберите собственность для выкупа" << endl;
 	for (int i = 0; i < player[playerNum]->getSizeOfMortV(); i++) {
 		Purchased* tmp = dynamic_cast<Purchased*>(board[player[playerNum]->getNumOfMortgage(i)]);
-		cout << i + 1;
+		cout << i + 1<<"1";
 		tmp->printUnMortgageInfo(player, playerNum);
 	}
 	int answer;
@@ -252,11 +362,11 @@ void Game::checkPlayerBalance(Player *player[],int playerNum) {
 		int searchsize = player[playerNum]->sizeOfVect();
 		while(player[playerNum]->getBalance() <0 && player[playerNum]->sizeOfVect()!=0)
 		{	
-			cout << "У вас отрицательный баланс, вам необходимо заложить свою собственность" << endl;
+			cout << "У вас отрицательный баланс("<<player[playerNum]->getBalance()<<"P), вам необходимо заложить свою собственность" << endl;
 			cout << "Выберите собственность:" << endl;
 			for (int i = 0; i < player[playerNum]->sizeOfVect() ;i++) {
 				Purchased* tmp = dynamic_cast<Purchased*>(board[player[playerNum]->getNumOfField(i)]);
-				cout << i + 1;
+				cout << i + 1<<")";
 				tmp->printMortgageInfo(player, playerNum);
 			}
 			cout << "0)Выход из игры" << endl;
@@ -280,25 +390,28 @@ void Game::checkPlayerBalance(Player *player[],int playerNum) {
 			}
 		}
 		if (player[playerNum]->getBalance() > 0) {
-			cout << player[playerNum]->getName() << " имеет " << player[playerNum]->getBalance() << endl;
+			cout << "Баланс "<<player[playerNum]->getName() << " равен " << player[playerNum]->getBalance() << endl;
 		}
 	}
 	else if (player[playerNum]->getBalance() > 0 && player[playerNum]->getSizeOfMortV() != 0) {
 		unMortgage(playerNum);
 	}
 	else {
-		cout << player[playerNum]->getName() << " имеет " << player[playerNum]->getBalance() << endl;
+		cout << "Баланс " << player[playerNum]->getName() << " равен " << player[playerNum]->getBalance() << endl;
 	}
 }
 void Game::setNumOfPlayers() {
-	cout << "Введите количество игроков: ";
+	cout << "Введите количество игроков(2-8): ";
 	int num;
 	cin >> num;
 	if (num > 1 && num <= 8)
 		numOfPlayers = num;
 	else {
-		while (num <= 1 && num > 8)
+		while (num <= 1 || num > 8)
+		{
+			cout << "Введено неправильное количество игроков, повторите попытку:";
 			cin >> num;
+		}
 		numOfPlayers = num;
 	}
 }

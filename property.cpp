@@ -28,9 +28,12 @@ void Property::printMortgageInfo(Player* player[], int playerNum) {
 	cout << this->getName() << "(залоговая стоимость: " << this->costOfMortage(player,playerNum) << ",зданий построено: " << numOfUpgrades << ",арендная плата: " << this->getRent(player, playerNum) <<")" << endl;
 }
 int Property::askPlayer(Player* player[], int playerNum) {
-	cout << "Купить данную улицу? "<<mColourGroup << endl;
+	cout << "Купить данную улицу? "<<"(арендная плата:"<<this->getRent(player,playerNum)<<",цвет:"<<this->mColourGroup<<")" << endl;
 	cout << "Баланс до покупки:" << player[playerNum]->getBalance() << endl;
 	cout << "Баланс после покупки:" << player[playerNum]->getBalance() - mCost << endl;
+	if (player[playerNum]->getBalance() - mCost < 0) {
+		cout << "Не волнуйтесь, если ваш баланс окажется меньше нуля, программа автоматически предложит вам заложить свою собственность, чтобы быстро вернуть потраченные деньги" << endl;
+	}
 	cout << "1)Да" << endl;
 	cout << "2)Нет" << endl;
 	cout << "->";

@@ -34,6 +34,9 @@ public:
 	void askUpgrade(int);
 	void fillQueue(queue <int> &q);
 	void unMortgage(int);
+	void printInfo(int);
+	void ask(int);
+	void rules();
 	vector <int> availableUpgrade(Player*player[], int playerNum, int searchsize);
 	void checkPlayerBalance(Player * player[],int playerNum);
 	~Game();

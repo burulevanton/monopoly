@@ -7,9 +7,6 @@ Player::Player(string name, int num) {
 	this->mLocation = 0;
 	this->changeLocation = false;
 	this->inGame = true;
-	this->spendMoney = false;
-	this->noMoney = 1;
-	//this->needUpgrade = false;
 	this->mRailwayOwned = 0;
 	this->mUtilityOwned = 0;
 }
@@ -101,25 +98,6 @@ bool Player::checkChanges() {
 void Player::setChanges(bool change) {
 	this->changeLocation = change;
 }
-/*void Player::setOwnedProperty(Field* property) {
-	mOwnedProperties.push_back(property);
-}
-void Player::setMortgage(Field* mortgage) {
-	mMortgageProperties.push_back(mortgage);
-	mOwnedProperties.erase(mOwnedProperties.begin());
-}
-int Player::getPropertiesAmount() {
-	return mOwnedProperties.size();
-}
-int Player::getMortgageAmount(){
-	return mMortgageProperties.size();
-}
-Field* Player::getMortgages(int num) {
-	return mMortgageProperties[num];
-}
-Field* Player::getProperties(int num) {
-	return mOwnedProperties[num];
-}*/
 void Player::quitGame() {
 	cout << this->getName() << " покидает игру" << endl;
 	inGame = false;
@@ -130,18 +108,6 @@ bool Player::checkQuit() {
 	}
 	else 
 		return true;
-}
-bool Player::getSpendMoney() {
-	return spendMoney;
-}
-void Player::setSpendMoney(bool money) {
-	spendMoney = money;
-}
-void Player::setCantBuy(bool can) {
-	this->cantBuy = can;
-}
-bool Player::getCantBuy() {
-	return cantBuy;
 }
 void Player::removeMortgage(int i) {
 	mFieldsOwned.push_back(mFieldsMortgage[i]);
@@ -169,18 +135,6 @@ int Player::getSizeOfMortV() {
 int Player::getNumOfMortgage(int num) {
 	return mFieldsMortgage[num];
 }
-void Player::setNoMoney(int money) {
-	noMoney = money;
-}
-int Player::getNoMoney() {
-	return noMoney;
-}
-/*bool Player::getUpgrade(){
-	return needUpgrade;
-}
-void Player::setUpgrade(bool upgrade) {
-	needUpgrade = upgrade;
-}*/
 void Player::removeColor(string color,int numOfUpgrades) {
 	for (int i = 0; i < mColourGroupOwned.size(); i++) {
 		if (mColourGroupOwned[i] == color && numOfUpgrades>=0) {
@@ -190,6 +144,26 @@ void Player::removeColor(string color,int numOfUpgrades) {
 		if (numOfUpgrades < 0) {
 			return;
 		}
+	}
+}
+int Player::getNumOfColor(string color) {
+	int count = 0;
+	for (int i = 0; i < mColourGroupOwned.size(); i++) {
+		if (mColourGroupOwned[i] == color) {
+			count++;
+		}
+	}
+	if (color == "коричневый" || color == "синий") {
+		if (count >= 2) {
+			return 2;
+		}
+		else return count;
+	}
+	else {
+		if (count >= 3) {
+			return 3;
+		}
+		else return count;
 	}
 }
 Player::~Player() {
