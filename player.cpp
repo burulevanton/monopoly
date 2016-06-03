@@ -5,13 +5,11 @@ Player::Player(string name, int num) {
 	this->mNumPlayer = num;
 	this->mCurrentBalance = 1500;
 	this->mLocation = 0;
-<<<<<<< HEAD
-=======
 	this->changeLocation = false;
 	this->inGame = true;
 	this->mRailwayOwned = 0;
 	this->mUtilityOwned = 0;
->>>>>>> dev
+	this->getDouble = 0;
 }
 
 string Player::getName() {
@@ -35,8 +33,6 @@ void Player::decBalance(int dec) {
 int Player::getBalance() {
 	return mCurrentBalance;
 }
-<<<<<<< HEAD
-=======
 void Player::setOwnedColor(string color) {
 	mColourGroupOwned.push_back(color);
 }
@@ -67,23 +63,10 @@ void Player::setMortgageUtility(int numOfUpgrade) {
 		numOfUpgrade--;
 	}
 }
->>>>>>> dev
 int Random() {
 	return  rand() % 6 + 1;
 }
 void Player::RollDice() {
-<<<<<<< HEAD
-	int playerRoll1 = 0;
-	int playerRoll2 = 0;
-	int previousLoc = 0;
-	int counter = 0;
-
-	playerRoll1 = Random();
-	playerRoll2 = Random();
-	cout << mNamePlayer << " vibrasivaet " << playerRoll1 <<" i " <<playerRoll2<<endl;
-	previousLoc = mLocation;
-	int playerRoll = playerRoll1 + playerRoll2;
-=======
 	int previousLoc = 0;
 	int counter = 0;
 	mRoll1 = 0;
@@ -93,33 +76,34 @@ void Player::RollDice() {
 	cout << mNamePlayer << " выбрасывает " << mRoll1 <<" и " <<mRoll2<<endl;
 	previousLoc = mLocation;
 	int playerRoll = mRoll1 + mRoll2;
->>>>>>> dev
+	if (mRoll1 == mRoll2) {
+		getDouble++;
+	}
+	else {
+		getDouble = 0;
+	}
 	while (mLocation < previousLoc + playerRoll)
 	{
 		mLocation++;
 
-<<<<<<< HEAD
-		if (mLocation == 26) {
-=======
 		if (mLocation == 40) {
->>>>>>> dev
 			playerRoll = playerRoll - counter;
 			mLocation = 0;
 			previousLoc = -1;
 			addBalance(200);
-<<<<<<< HEAD
-			cout << mNamePlayer << " prohodit go i poluchaet 200" << endl;
-=======
 			cout << mNamePlayer << " проходит поле Вперёд и получает 200" << endl;
->>>>>>> dev
 		}
 		counter++;
 	}
 }
-<<<<<<< HEAD
-=======
 int Player::getRoll() {
-	return mRoll1 + mRoll2;
+	return mRoll1 + mRoll2;	
+}
+void Player::setGetDouble() {
+	getDouble = 0;
+}
+int Player::checkGetDouble() {
+	return getDouble;
 }
 bool Player::checkChanges() {
 	return changeLocation;
@@ -195,7 +179,6 @@ int Player::getNumOfColor(string color) {
 		else return count;
 	}
 }
->>>>>>> dev
 Player::~Player() {
 
 }

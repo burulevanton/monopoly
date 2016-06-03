@@ -86,10 +86,15 @@ void Purchased::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<in
 
 	else if (mOwner != playerNum) {
 		cout << player[playerNum]->getName() << " попадает на поле <" << this->getName()<<">" << endl;
-		int toPay=this->getRent(player, mOwner);
-		player[playerNum]->decBalance(toPay);
-		player[playerNum]->addBalance(toPay);
-		cout << player[playerNum]->getName() << " платит " << toPay << " – за аренду " << endl;
+		if (isMortgage == false) {
+			int toPay = this->getRent(player, mOwner);
+			player[playerNum]->decBalance(toPay);
+			player[playerNum]->addBalance(toPay);
+			cout << player[playerNum]->getName() << " платит " << toPay << " – за аренду " << endl;
+		}
+		else {
+			cout << "данное поле заложенно" << endl;
+		}
 	}
 }
 Purchased::~Purchased() {

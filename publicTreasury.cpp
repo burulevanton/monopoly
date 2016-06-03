@@ -1,41 +1,5 @@
 #include "publicTreasury.h"
 #include "player.h"
-<<<<<<< HEAD
-Treasury::Treasury(string name) :Field(name) {
-
-}
-void Treasury::doTurn(Player* player[], int playerNum) {
-	int randomPenalty = 0;
-	cout << player[playerNum]->getName() << " popal na " << this->getName() << endl;
-	randomPenalty = Random();
-	switch (randomPenalty) {
-	case 1:
-		cout << "1" << endl;
-		player[playerNum]->decBalance(25);
-		break;
-	case 2:
-		cout << "2" << endl;
-		player[playerNum]->decBalance(50);
-		break;
-	case 3:
-		cout << "3" << endl;
-		player[playerNum]->decBalance(75);
-		break;
-	case 4:
-		cout << "4" << endl;
-		player[playerNum]->decBalance(100);
-		break;
-	case 5:
-		cout << "5" << endl;
-		player[playerNum]->decBalance(125);
-		break;
-	case 6:
-		cout << "6" << endl;
-		player[playerNum]->decBalance(150);
-		break;
-	}
-}
-=======
 Treasury::Treasury(string name, int location) :Field(name,location) {
 
 }
@@ -43,7 +7,7 @@ void Treasury::doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int
 	int numCard = 0;
 	cout << player[playerNum]->getName() << " попадает на поле " << this->getName() << endl;
 	numCard = getTreasuryCard(q2);
-	cout << player[playerNum]->getName() << "берёт карточку" << endl;
+	cout << player[playerNum]->getName() << " берёт карточку" << endl;
 	switch (numCard) {
 	case 1:
 		cout << "<Получите по 10 от каждого игрока>" << endl;
@@ -129,7 +93,6 @@ int Treasury::getTreasuryCard(queue<int> &q) {
 	q.push(card);
 	return card;
 }
->>>>>>> dev
 Treasury::~Treasury() {
 
 }

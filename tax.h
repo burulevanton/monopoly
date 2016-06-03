@@ -6,15 +6,9 @@ class Tax :public Field {
 private:
 	int mCost;
 public:
-<<<<<<< HEAD
-	Tax(string name,int cost);
-
-	void doTurn(Player* player[], int playerNum);
-=======
 	Tax(string name, int location,int cost);
 
 	void doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2, int numOfPlayers);
->>>>>>> dev
 
 	~Tax();
 };

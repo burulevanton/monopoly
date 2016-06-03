@@ -1,18 +1,6 @@
 #ifndef RAILWAY_H
 #define RAILWAY_H
 #pragma once
-<<<<<<< HEAD
-#include "field.h"
-class Railway :public Field {
-private:
-	int mOwner;
-public:
-	Railway(string name);
-	virtual void doTurn(Player* player[], int playerNum);
-
-	int getOwner();
-
-=======
 #include "purchased.h"
 class Railway :public Purchased {
 public:
@@ -27,7 +15,6 @@ public:
 	void unsetMortgage(Player* player[], int playerNum,int i);
 	void setOwned(Player* player[], int playerNum);
 	int getRent(Player* player[], int playerNum);
->>>>>>> dev
 	~Railway();
 };
 #endif

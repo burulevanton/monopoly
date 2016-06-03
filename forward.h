@@ -4,15 +4,9 @@
 #include "field.h"
 class Forward :public Field {
 public:
-<<<<<<< HEAD
-	Forward(string name);
-
-	void doTurn(Player* player[], int playerNum);
-=======
 	Forward(string name,int location);
 
 	void doTurn(Player* player[], int playerNum, queue<int> &q1, queue<int> &q2, int numOfPlayers);
->>>>>>> dev
 
 	~Forward();
 };

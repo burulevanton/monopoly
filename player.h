@@ -3,90 +3,76 @@
 #pragma once
 #include <iostream>
 #include <string>
-<<<<<<< HEAD
-using namespace std;
-=======
 #include <vector>
 using namespace std;
 class Field;
->>>>>>> dev
 class Player
 {
 private:
-	string mNamePlayer;
-	int mNumPlayer;
-	int mCurrentBalance;
-<<<<<<< HEAD
-	int mLocation;
-=======
+	string mNamePlayer; //имя игрока
+	int mNumPlayer; //номер игрока
+	int mCurrentBalance; //баланс игрока
 	bool changeLocation; //смена локации от поля Шанс
-	int mLocation;
-	int mRoll1;
-	int mRoll2;
-	bool inGame;
-	vector <string> mColourGroupOwned;
-	int mRailwayOwned;
-	int mUtilityOwned;
-	vector <int> mFieldsOwned;
-	vector <int> mFieldsMortgage;
->>>>>>> dev
+	int mLocation;//позиция игрока на поле
+	int mRoll1; //значение кубика №1 
+	int mRoll2; //значение кубика №2
+	bool inGame; //индикатор нахождения в игре true - в игре false - вышел
+	int getDouble; //количество дублей
+	vector <string> mColourGroupOwned;//вектор, купленных цветов
+	int mRailwayOwned; //количество купленных ж/д станций
+	int mUtilityOwned; //количество купленных коммунальных предприятий
+	vector <int> mFieldsOwned; //вектор купленный полей
+	vector <int> mFieldsMortgage;// вектор заложенных полей
 public:
-	Player(string name, int numPlayer);
-
-	string getName();
+	Player(string name, int numPlayer); // конструктор
+  
+	string getName(); //функция получения имени
 	
-	int getPlayerNum();
+	int getPlayerNum(); //функция получения номера игрока
 
-<<<<<<< HEAD
-=======
+	int checkGetDouble(); //функция проверки на выброс дубля
+	void setGetDouble(); //возврат индикатора дубля в значение 0
 
-	void removeColor(string,int);
->>>>>>> dev
-	int getBalance();
-	void addBalance(int add);
-	void decBalance(int dec);
+	void removeColor(string,int); //удаление владения одним цветом из вектора
 
-	int getLocation();
-	void setLocation(int loc);
+	int getBalance(); //функция, возвращающая баланс игрока
+	void addBalance(int add); //процедура добавления денег к балансу
+	void decBalance(int dec); //процедура снятия денег с баланса
 
-<<<<<<< HEAD
-	void RollDice();
-=======
-	void quitGame();
-	bool checkQuit();
+	int getLocation(); //функция, возвращающая позицию игрока
+	void setLocation(int loc); //процедура, устанавливающая позицию игрока
 
-	void ownField(int);
-	int sizeOfVect();
-	int getNumOfField(int);
+	void quitGame(); //выход из игры
+	bool checkQuit();//проверка выхода из игры
 
-	void mortgageField(int);
-	int getSizeOfMortV();
-	int getNumOfMortgage(int);
+	void ownField(int); //процедура покупки поля
+	int sizeOfVect(); //функция, возвращающая размер вектора купленных полей
+	int getNumOfField(int); //получения номера поля по индексу в векторе
 
-	void setNoMoney(int);
-	int getNoMoney();
+	void mortgageField(int); //закладывание поля
+	int getSizeOfMortV(); //функция, возвращающая размер вектора заложенных полей
+	int getNumOfMortgage(int); //получения номера заложенного поля по индексу в векторе
 
-	vector <string> getOwnedColor();
-	void setOwnedColor(string color);
-	int getNumOfColor(string color);
-	void removeMortgage(int);
-	void removeInOwn(int);
-	void setOwnedRailway();
-	void setMortgageRailway(int);
-	int getOwnedRailway();
+	vector <string> getOwnedColor(); //фунция, возвращающая вектор купленных цветов
+	void setOwnedColor(string color); //покупка определенного цвета
+	int getNumOfColor(string color); //определение, сколько полей данного цвета купил игрок
+	void removeMortgage(int); //удаление из залога
+	void removeInOwn(int); //игрок больше не владеет данным полем
+	void setOwnedRailway(); //покупка поля ж/д станции
+	void setMortgageRailway(int); //закладывание поля ж/д станции
+	int getOwnedRailway(); //получение количества купленных полей жд станции
 
-	void setOwnedUtility();
-	void setMortgageUtility(int);
-	int getOwnedUtility();
+	void setOwnedUtility(); //покупка поля коммунальных предприятий
+	void setMortgageUtility(int); //закладывание коммунального предприятия 
+	int getOwnedUtility();// получение количества купленных коммунальных предприятий
 
-	void RollDice();
-	int getRoll();
+	void RollDice(); //бросок кубиков
+	int getRoll(); //получение значения с выброшенных кубиков
 
-	bool checkChanges();
-	void setChanges(bool change);
->>>>>>> dev
+	bool checkChanges(); //проверка на изменение позиции игрока(нужна для полей Шанс и Общественная казна)
+	void setChanges(bool change); //установление изменения позиции игрока в ходе попадания на поле Шанс или Общественная казна
 
-	~Player();
+	~Player(); //деструктор
 };
-int Random();
+int Random(); //функция рандома от 1 до 6
 #endif

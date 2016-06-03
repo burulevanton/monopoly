@@ -10,6 +10,12 @@ int Utility::askPlayer(Player* player[], int playerNum) {
 	cout << "->";
 	int answer;
 	cin >> answer;
+	while (answer < 1 || answer>2) {
+		cout << "Вы ввели неверное число" << endl;
+		cout << "Попробуйте ещё раз" << endl;
+		cout << "->";
+		cin >> answer;
+	}
 	return answer;
 }
 void Utility::printInfo(Player* player[], int playerNum) {
@@ -24,6 +30,12 @@ void Utility::askForUpgrade(Player* player[], int playerNum) {
 	cout << "->";
 	int answer;
 	cin >> answer;
+	while (answer < 1 || answer>2) {
+		cout << "Вы ввели неверное число" << endl;
+		cout << "Попробуйте ещё раз" << endl;
+		cout << "->";
+		cin >> answer;
+	}
 	switch (answer) {
 	case 1:
 		numOfUpgrades++;
@@ -50,7 +62,7 @@ void Utility::printMortgageInfo(Player* player[], int playerNum) {
 }
 int Utility::getRentWithoutDice(Player* player[], int playerNum) {
 	if (player[playerNum]->getOwnedRailway() % 2 == 0) {
-		return mRent[numOfUpgrades];
+		return mRent[numOfUpgrades]*2.5;
 	}
 	if (player[playerNum]->getOwnedRailway() % 2 != 0) {
 		return mRent[numOfUpgrades];

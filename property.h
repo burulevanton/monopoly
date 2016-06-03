@@ -5,24 +5,6 @@
 #include <string>
 
 #include "player.h"
-<<<<<<< HEAD
-#include "field.h"
-
-class Property : public Field
-{
-private:
-	int mCost;
-	int mRent;
-	int mOwner;
-public:
-	Property(string name, int cost, int rent);
-	virtual void doTurn(Player* player[], int playerNum);
-
-	int getCost();
-	int getRent();
-	int getOwner();
-
-=======
 #include "purchased.h"
 
 class Property : public Purchased
@@ -43,7 +25,6 @@ public:
 	void setOwned(Player* player[], int playerNum);
 	int getRent(Player* player[], int playerNum);
 	int rentWithoutUpgrades(Player* player[], int playerNum);
->>>>>>> dev
 	~Property();
 };
 #endif

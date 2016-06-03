@@ -1,28 +1,4 @@
 #include "railway.h"
-<<<<<<< HEAD
-Railway::Railway(string name) :Field(name) {
-}
-int Railway::getOwner() {
-	return mOwner;
-}
-void Railway::doTurn(Player* player[], int playerNum) {
-	cout << player[playerNum]->getName() << "popal na" << this->getName() << endl;
-	if (mOwner < 0) {
-		if (player[playerNum]->getBalance() >= 200) {
-			player[playerNum]->decBalance(200);
-			cout << player[playerNum]->getName() << " kupil " << this->getName() << " za " << 200 << endl;
-			mOwner = playerNum;
-		}
-		else
-		{
-			return;
-		}
-	}
-	else if (mOwner != playerNum) {
-		player[playerNum]->decBalance(25);
-		player[mOwner]->addBalance(25);
-	}
-=======
 Railway::Railway(string name, int location, int cost, int rent, int costOfUpgrade, int rent1, int rent2, int rent3, int rent4, int rent5) :Purchased(name, location, cost, rent, costOfUpgrade, rent1, rent2, rent3, rent4, rent5) {
 }
 
@@ -35,6 +11,12 @@ int Railway::askPlayer(Player* player[], int playerNum) {
 	cout << "->";
 	int answer;
 	cin >> answer;
+	while (answer < 1 || answer>2) {
+		cout << "Вы ввели неверное число" << endl;
+		cout << "Попробуйте ещё раз" << endl;
+		cout << "->";
+		cin >> answer;
+	}
 	return answer;
 }
 void Railway::printInfo(Player* player[], int playerNum) {
@@ -49,6 +31,12 @@ void Railway::askForUpgrade(Player* player[], int playerNum) {
 	cout << "->";
 	int answer;
 	cin >> answer;
+	while (answer < 1 || answer>2) {
+		cout << "Вы ввели неверное число" << endl;
+		cout << "Попробуйте ещё раз" << endl;
+		cout << "->";
+		cin >> answer;
+	}
 	switch (answer) {
 	case 1:
 		numOfUpgrades++;
@@ -119,7 +107,6 @@ void Railway::unsetMortgage(Player* player[], int playerNum,int i) {
 	player[playerNum]->removeMortgage(i);
 	player[playerNum]->decBalance(costOfMortage(player, playerNum)*1.1);
 	numOfTurns = -1;
->>>>>>> dev
 }
 Railway::~Railway() {
 

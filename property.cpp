@@ -1,38 +1,6 @@
 #include "field.h"
 #include "property.h"
 
-<<<<<<< HEAD
-Property::Property(string name, int cost, int rent) :Field(name) {
-	this->mCost = cost;
-	this->mRent = rent;
-	this->mOwner = -1;
-}
-int Property::getCost() {
-	return mCost;
-}
-int Property::getOwner() {
-	return mOwner;
-}
-int Property::getRent() {
-	return mRent;
-}
-void Property::doTurn(Player* player[], int playerNum) {
-	cout << player[playerNum]->getName() << "popal na" << this->getName() << endl;
-	if (mOwner < 0) {
-		if (player[playerNum]->getBalance() >= mCost) {
-			player[playerNum]->decBalance(mCost);
-			cout << player[playerNum]->getName() << " kupil " << this->getName()<<" za "<<mCost << endl;
-			mOwner = playerNum;
-		}
-		else
-		{
-			return;
-		}
-	}
-	else if (mOwner != playerNum) {
-		player[playerNum]->decBalance(mRent);
-		player[mOwner]->addBalance(mRent);
-=======
 Property::Property(string name, int location, int cost, int rent,int costOfUpgrade, int rent1, int rent2, int rent3, int rent4, int rent5, string color) :Purchased(name, location,cost,rent,costOfUpgrade,rent1,rent2,rent3,rent4,rent5) {
 	this->mColourGroup = color;
 }
@@ -71,6 +39,12 @@ int Property::askPlayer(Player* player[], int playerNum) {
 	cout << "->";
 	int answer;
 	cin >> answer;
+	while (answer < 1 || answer>2) {
+		cout << "Вы ввели неверное число" << endl;
+		cout << "Попробуйте ещё раз" << endl;
+		cout << "->";
+		cin >> answer;
+	}
 	return answer;
 }
 void Property::askForUpgrade(Player* player[], int playerNum) {
@@ -82,6 +56,12 @@ void Property::askForUpgrade(Player* player[], int playerNum) {
 	cout << "->";
 	int answer;
 	cin >> answer;
+	while (answer < 1 || answer>2) {
+		cout << "Вы ввели неверное число" << endl;
+		cout << "Попробуйте ещё раз" << endl;
+		cout << "->";
+		cin >> answer;
+	}
 	switch (answer) {
 	case 1:
 		numOfUpgrades++;
@@ -162,7 +142,7 @@ int Property::allowUpgrade(Player* player[], int playerNum) {
 		if (count % 2 == 0 && count != 0) {
 			return getLocation();
 		}
-		if (count % 2 != 0) {
+		if (count % 2 != 0) {      
 			if (count / 2 > numOfUpgrades) {
 				return getLocation();
 			}
@@ -183,7 +163,6 @@ int Property::allowUpgrade(Player* player[], int playerNum) {
 				return 0;
 			}
 		}
->>>>>>> dev
 	}
 }
 Property::~Property() {
