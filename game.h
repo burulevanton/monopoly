@@ -32,6 +32,7 @@ public:
 	void setPlayers();
 	void playRound();
 	void askUpgrade(int);
+	void ifDouble(int);
 	void fillQueue(queue <int> &q);
 	void unMortgage(int);
 	void printInfo(int);

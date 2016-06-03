@@ -11,6 +11,12 @@ int Railway::askPlayer(Player* player[], int playerNum) {
 	cout << "->";
 	int answer;
 	cin >> answer;
+	while (answer < 1 || answer>2) {
+		cout << "Вы ввели неверное число" << endl;
+		cout << "Попробуйте ещё раз" << endl;
+		cout << "->";
+		cin >> answer;
+	}
 	return answer;
 }
 void Railway::printInfo(Player* player[], int playerNum) {
@@ -25,6 +31,12 @@ void Railway::askForUpgrade(Player* player[], int playerNum) {
 	cout << "->";
 	int answer;
 	cin >> answer;
+	while (answer < 1 || answer>2) {
+		cout << "Вы ввели неверное число" << endl;
+		cout << "Попробуйте ещё раз" << endl;
+		cout << "->";
+		cin >> answer;
+	}
 	switch (answer) {
 	case 1:
 		numOfUpgrades++;

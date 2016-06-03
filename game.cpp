@@ -119,6 +119,10 @@ void Game::playRound() {
 				board[player[j]->getLocation()]->doTurn(player, j, cardChance, cardTreasury,numOfPlayers);
 				player[j]->setChanges(false);
 			}
+			cout << player[j]->checkGetDouble() << endl;
+			if (player[j]->checkGetDouble() > 0) {
+				ifDouble(j);
+			}
 			askUpgrade(j);
 			checkPlayerBalance(player, j);
 			cout << "////////////////////////////////////////////////////" << endl;
@@ -149,6 +153,29 @@ void Game::playRound() {
 		}
 	}
 }
+void Game::ifDouble(int playerNum) {
+	while (player[playerNum]->checkGetDouble() != 0) {
+		cout << "Вы выбросили дубль. Ходите ещё(до попадания в тюрьму за дубль осталось дублей:" << 3 - player[playerNum]->checkGetDouble() << ")" << endl;
+		player[playerNum]->RollDice();
+		if (player[playerNum]->checkGetDouble() != 3) {
+			board[player[playerNum]->getLocation()]->doTurn(player, playerNum, cardChance, cardTreasury, numOfPlayers);
+			cout << "--------------------------------------------------" << endl;
+			if (player[playerNum]->checkChanges()) {
+				board[player[playerNum]->getLocation()]->doTurn(player, playerNum, cardChance, cardTreasury, numOfPlayers);
+				player[playerNum]->setChanges(false);
+			}
+		}
+		else {
+			cout << "Вы выбросили слишком большое количество дублей, отправляйтесь в тюрьму" << endl;
+			player[playerNum]->setLocation(10);
+			player[playerNum]->setChanges(true);
+			board[player[playerNum]->getLocation()]->doTurn(player, playerNum, cardChance, cardTreasury, numOfPlayers);
+			player[playerNum]->setChanges(false);
+			player[playerNum]->setGetDouble();
+		}
+		
+	}
+}
 void Game::ask(int playerNum) {
 	cout << "1)Бросить кубики" << endl;
 	cout << "2)Просмотреть информацию о себе" << endl;
@@ -157,6 +184,12 @@ void Game::ask(int playerNum) {
 	cout << "5)Выход из игры" << endl;
 	int answer;
 	cin >> answer;
+	while (answer < 1 || answer>5) {
+		cout << "Вы ввели неверное число" << endl;
+		cout << "Попробуйте ещё раз" << endl;
+		cout << "->";
+		cin >> answer;
+	}
 	cout << "--------------------------------------------------" << endl;
 	switch (answer) {
 	case 1: {
@@ -290,6 +323,12 @@ void Game::askUpgrade(int playerNum) {
 		cout << ":";
 		int answer;
 		cin >> answer;
+		while (answer < 0 || answer>searchSize) {
+			cout << "Вы ввели неверное число" << endl;
+			cout << "Попробуйте ещё раз" << endl;
+			cout << "->";
+			cin >> answer;
+		}
 		if (answer == 0) {
 			return;
 		}
@@ -302,6 +341,12 @@ void Game::askUpgrade(int playerNum) {
 			cout << "2)Нет" << endl;
 			cout << ":";
 			cin >> answer;
+			while (answer < 1 || answer>2) {
+				cout << "Вы ввели неверное число" << endl;
+				cout << "Попробуйте ещё раз" << endl;
+				cout << "->";
+				cin >> answer;
+			}
 			switch (answer) {
 			case 1:
 				askUpgrade(playerNum);
@@ -331,8 +376,16 @@ void Game::unMortgage(int playerNum) {
 		cout << i + 1<<"1";
 		tmp->printUnMortgageInfo(player, playerNum);
 	}
+	cout << "0)Ничего не делать" << endl;
+	cout << "->";
 	int answer;
 	cin >> answer;
+	while (answer < 0 || answer>player[playerNum]->getSizeOfMortV()) {
+		cout << "Вы ввели неверное число" << endl;
+		cout << "Попробуйте ещё раз" << endl;
+		cout << "->";
+		cin >> answer;
+	}
 	if (answer == 0) {
 		cout << "Помните, что если вы не выкупите свою собственность меньше чем за 10 ходов, она станет доступной для покупки всем";
 		return;
@@ -346,6 +399,12 @@ void Game::unMortgage(int playerNum) {
 			cout << "2)Нет" << endl;
 			cout << ":";
 			cin >> answer;
+			while (answer < 1 || answer>2) {
+				cout << "Вы ввели неверное число" << endl;
+				cout << "Попробуйте ещё раз" << endl;
+				cout << "->";
+				cin >> answer;
+			}
 			switch (answer) {
 			case 1:
 				unMortgage(playerNum);
@@ -373,6 +432,12 @@ void Game::checkPlayerBalance(Player *player[],int playerNum) {
 			cout << ":";
 			int answer;
 			cin >> answer;
+			while (answer < 0 || answer>player[playerNum]->sizeOfVect()) {
+				cout << "Вы ввели неверное число" << endl;
+				cout << "Попробуйте ещё раз" << endl;
+				cout << "->";
+				cin >> answer;
+			}
 			if (answer == 0) {
 				player[playerNum]->quitGame();
 				return;

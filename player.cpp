@@ -9,6 +9,7 @@ Player::Player(string name, int num) {
 	this->inGame = true;
 	this->mRailwayOwned = 0;
 	this->mUtilityOwned = 0;
+	this->getDouble = 0;
 }
 
 string Player::getName() {
@@ -75,6 +76,12 @@ void Player::RollDice() {
 	cout << mNamePlayer << " выбрасывает " << mRoll1 <<" и " <<mRoll2<<endl;
 	previousLoc = mLocation;
 	int playerRoll = mRoll1 + mRoll2;
+	if (mRoll1 == mRoll2) {
+		getDouble++;
+	}
+	else {
+		getDouble = 0;
+	}
 	while (mLocation < previousLoc + playerRoll)
 	{
 		mLocation++;
@@ -90,7 +97,13 @@ void Player::RollDice() {
 	}
 }
 int Player::getRoll() {
-	return mRoll1 + mRoll2;
+	return mRoll1 + mRoll2;	
+}
+void Player::setGetDouble() {
+	getDouble = 0;
+}
+int Player::checkGetDouble() {
+	return getDouble;
 }
 bool Player::checkChanges() {
 	return changeLocation;

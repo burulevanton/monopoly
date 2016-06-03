@@ -17,6 +17,7 @@ private:
 	int mRoll1;
 	int mRoll2;
 	bool inGame;
+	int getDouble;
 	vector <string> mColourGroupOwned;
 	int mRailwayOwned;
 	int mUtilityOwned;
@@ -29,6 +30,8 @@ public:
 	
 	int getPlayerNum();
 
+	int checkGetDouble();
+	void setGetDouble();
 
 	void removeColor(string,int);
 	int getBalance();
