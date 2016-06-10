@@ -19,27 +19,28 @@
 #include "tax.h"
 #include "utility.h"
 #include "purchased.h"
+//класс »гра
 class Game {
 private:
-	vector <Field*> board;
-	int numOfPlayers;
-	Player* player[8];
-	queue <int> cardChance;
-	queue <int> cardTreasury;
+	vector <Field*> board; //вектор всех полей 
+	int numOfPlayers; //количество игроков
+	Player* player[8]; //массив с игроками
+	queue <int> cardChance; //очередь с картами Ўанс
+	queue <int> cardTreasury; //очередь с картами ќбщественна€ казна
 public:
-	Game();
-	void setNumOfPlayers();
-	void setPlayers();
-	void playRound();
-	void askUpgrade(int);
-	void ifDouble(int);
-	void fillQueue(queue <int> &q);
-	void unMortgage(int);
-	void printInfo(int);
-	void ask(int);
-	void rules();
-	vector <int> availableUpgrade(Player*player[], int playerNum, int searchsize);
-	void checkPlayerBalance(Player * player[],int playerNum);
+	Game(); //конструктор
+	void setNumOfPlayers();//устанавливаем количество игроков
+	void setPlayers(); //устанавливаем имена игроков и заносим их в массив
+	void playRound(); //играем игру в ћонополию
+	void askUpgrade(int); // процедура,отвечающа€ за апгрейд полей
+	void ifDouble(int); //проверка на выбрасывание дубл€
+	void fillQueue(queue <int> &q); //заполнение очереди
+	void unMortgage(int); //убираем поле из залога
+	void printInfo(int);//выводим необходимую информацию о игроке
+	void ask(int); // разговор с пользователем
+	void rules();//вывод правил
+	vector <int> availableUpgrade(Player*player[], int playerNum, int searchsize);//возвращаем вектор разрешЄнных апгрейдов
+	void checkPlayerBalance(Player * player[],int playerNum); //проверка баланса
 	~Game();
 };
 #endif

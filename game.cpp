@@ -98,7 +98,7 @@ Game::Game() {
 void Game::playRound() {
 	int numOfActivePlayers = numOfPlayers;
 	int numOfTurn = 1;
-	while(numOfActivePlayers>1) {
+	while(numOfActivePlayers>1) { 
 		numOfActivePlayers = 0;
 		cout << "************************************************" << endl;
 		cout << "ХОД №" << numOfTurn << endl;
@@ -110,20 +110,20 @@ void Game::playRound() {
 			}
 		if (player[j]->checkQuit() == false) {
 			cout << player[j]->getName() << " ходит(баланс=" <<player[j]->getBalance()<<"P)"<< endl;
-			ask(j);
+			ask(j); //разговор с пользователем
 			cout << "--------------------------------------------------" << endl;
 			if(player[j]->checkQuit()==false){
-			board[player[j]->getLocation()]->doTurn(player, j, cardChance, cardTreasury,numOfPlayers);
+			board[player[j]->getLocation()]->doTurn(player, j, cardChance, cardTreasury,numOfPlayers); //ход игрока на поле
 			cout << "--------------------------------------------------" << endl;
-			if (player[j]->checkChanges()) {
+			if (player[j]->checkChanges()) { //если произошли изменения позиции игрока на поле(вследствии карточек Шанс, Общественная казна и тд)
 				board[player[j]->getLocation()]->doTurn(player, j, cardChance, cardTreasury,numOfPlayers);
 				player[j]->setChanges(false);
 			}
-			if (player[j]->checkGetDouble() > 0) {
+			if (player[j]->checkGetDouble() > 0) { //проверка на дубль
 				ifDouble(j);
 			}
-			askUpgrade(j);
-			checkPlayerBalance(player, j);
+			askUpgrade(j); //проверка на апгрейд
+			checkPlayerBalance(player, j); //проверка баланса
 			cout << "////////////////////////////////////////////////////" << endl;
 		}
 			if (player[j]->checkQuit() == false) {
@@ -131,7 +131,7 @@ void Game::playRound() {
 			}
 		}
 		}
-		for (int i = 0; i < numOfPlayers; i++) {
+		for (int i = 0; i < numOfPlayers; i++) { // в данном цикле увеличиваем количество ходов продержанных в залоге у каждого поля
 			int searchSize = player[i]->getSizeOfMortV();
 			int j = 0;
 			while(j!=player[i]->getSizeOfMortV()){
@@ -146,7 +146,7 @@ void Game::playRound() {
 		}
 		numOfTurn++;
 	}
-	for (int i = 0; i < numOfPlayers; i++) {
+	for (int i = 0; i < numOfPlayers; i++) {//вывод победителя
 		if (player[i]->checkQuit() == false) {
 			cout << "Победил " << player[i]->getName() << endl;;
 		}
@@ -195,7 +195,7 @@ void Game::ask(int playerNum) {
 		player[playerNum]->RollDice();
 		return;
 		break; }
-	case 2: {
+	case 2: { //Вывод информации об игроке
 		printInfo(playerNum);
 		cout << "--------------------------------------------------" << endl;
 		if (player[playerNum]->getSizeOfMortV() != 0) {
@@ -227,7 +227,7 @@ void Game::ask(int playerNum) {
 			ask(playerNum);
 		}
 		break; }
-	case 3:{
+	case 3:{ //Вывод информации о других игроках
 		for (int i = 0; i < numOfPlayers; i++) {
 			if (i != playerNum && player[i]->checkQuit() == false) {
 				printInfo(i);
@@ -237,11 +237,11 @@ void Game::ask(int playerNum) {
 		ask(playerNum);
 		break;
 	}
-	case 4: {
+	case 4: { //Вывод правил
 		rules();
 		ask(playerNum);
 		break; }
-	case 5:
+	case 5: //выход из игры
 		player[playerNum]->quitGame();
 		return;
 		break;
@@ -300,7 +300,7 @@ void Game::askUpgrade(int playerNum) {
 	vector<int>upgrades;
 	if (player[playerNum]->getBalance() > 0) {
 		int searchSize = player[playerNum]->sizeOfVect();
-		if (searchSize == 0) {
+		if (searchSize == 0) {      
 			cout << "Вам нечего улучшать" << endl;
 			return;
 		}
@@ -312,7 +312,7 @@ void Game::askUpgrade(int playerNum) {
 			}
 		}
 		cout << player[playerNum]->getName() << ", вы можете улучшить ваши владения:" << endl;
-		for (int i = 0; i < searchSize; i++) {
+		for (int i = 0; i < searchSize; i++) {  //вывод всех владений которые можно улучшить
 			int numOfField = upgrades[i];
 			Purchased * tmp = dynamic_cast<Purchased*>(board[numOfField]);
 			cout << i + 1 << ") ";
@@ -331,7 +331,7 @@ void Game::askUpgrade(int playerNum) {
 		if (answer == 0) {
 			return;
 		}
-		else {
+		else {   
 			int numOfField = upgrades[answer - 1];
 			Purchased * tmp1 = dynamic_cast<Purchased*>(board[numOfField]);
 			tmp1->setUpgrade(player, playerNum);
@@ -418,7 +418,7 @@ void Game::unMortgage(int playerNum) {
 void Game::checkPlayerBalance(Player *player[],int playerNum) {
 	if (player[playerNum]->getBalance() < 0) {
 		int searchsize = player[playerNum]->sizeOfVect();
-		while(player[playerNum]->getBalance() <0 && player[playerNum]->sizeOfVect()!=0)
+		while(player[playerNum]->getBalance() <0 && player[playerNum]->sizeOfVect()!=0) 
 		{	
 			cout << "У вас отрицательный баланс("<<player[playerNum]->getBalance()<<"P), вам необходимо заложить свою собственность" << endl;
 			cout << "Выберите собственность:" << endl;
